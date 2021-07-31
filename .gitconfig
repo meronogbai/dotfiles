@@ -1,0 +1,9 @@
+[user]
+	name = Meron Ogbai
+	email = okbaymeron@gmail.com
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[core]
+	excludesFile = ~/.gitignore_global
