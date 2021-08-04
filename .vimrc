@@ -6,8 +6,7 @@ set expandtab
 set tabstop=2
 set shiftwidth=2
 set mouse=a
-set clipboard+=unnamedplus
-set cursorline
+set clipboard=unnamedplus
 set autoindent
 set smartindent
 set termguicolors

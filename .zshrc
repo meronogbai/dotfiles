@@ -27,7 +27,7 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
-export EDITOR='nvim'
+export EDITOR='vim'
 export PATH=$HOME/bin:$PATH
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
