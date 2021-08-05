@@ -15,3 +15,6 @@ cd ~/.dotfiles
 ./setup.sh
 ```
 
+## Notes
+
+Don't forget to install [antigen](https://github.com/zsh-users/antigen) and [asdf](https://asdf-vm.com/) and edit the lines that source them in `.zshrc`.
