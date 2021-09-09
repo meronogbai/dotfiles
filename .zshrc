@@ -31,9 +31,6 @@ export EDITOR='vim'
 export PATH=$HOME/bin:$PATH
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-alias vc="sudo protonvpn c -f"
-alias vd="sudo protonvpn d"
-alias myip="curl ipinfo.io/ip"
 alias t="task"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
