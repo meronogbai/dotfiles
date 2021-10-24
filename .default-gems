@@ -1,6 +1,2 @@
-bundler
-pry
-rails
 solargraph
 rubocop
-rubocop-rails
