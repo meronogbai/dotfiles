@@ -31,7 +31,7 @@ export EDITOR='vim'
 export PATH=$HOME/bin:$PATH
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
-alias notes="vim ~/Documents/notes"
+alias notes="code ~/Documents/notes"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
