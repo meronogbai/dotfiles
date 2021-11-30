@@ -5,9 +5,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Source asdf and antigen.
-. /opt/asdf-vm/asdf.sh
-source /usr/share/zsh/share/antigen.zsh
+source $(brew --prefix)/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
 
@@ -21,6 +19,7 @@ antigen bundles <<EOBUNDLES
   history-substring-search
   z
   colored-man-pages
+  asdf
 EOBUNDLES
 
 antigen theme romkatv/powerlevel10k
@@ -28,8 +27,7 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 export EDITOR='vim'
-export PATH=$HOME/bin:$PATH
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export PATH=$HOME/Code/bin:$PATH
 
 alias notes="code ~/Documents/notes"
 
