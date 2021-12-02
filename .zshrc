@@ -5,6 +5,17 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Enable Homebrew's completions.
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+
+  autoload -Uz compinit
+  compinit
+fi
+
+# Source asdf and antigen.
+. /opt/homebrew/opt/asdf/libexec/asdf.sh
 source $(brew --prefix)/share/antigen/antigen.zsh
 
 antigen use oh-my-zsh
@@ -19,7 +30,6 @@ antigen bundles <<EOBUNDLES
   history-substring-search
   z
   colored-man-pages
-  asdf
 EOBUNDLES
 
 antigen theme romkatv/powerlevel10k
@@ -30,6 +40,7 @@ export EDITOR='vim'
 export PATH=$HOME/Code/bin:$PATH
 
 alias notes="code ~/Documents/notes"
+alias up="brew update && brew upgrade"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
