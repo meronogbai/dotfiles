@@ -36,7 +36,7 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 export EDITOR='vim'
-export PATH=$HOME/Code/bin:$PATH
+export PATH=$HOME/code/bin:$PATH
 
 alias notes="code ~/Documents/notes"
 alias up="brew update && brew upgrade"
