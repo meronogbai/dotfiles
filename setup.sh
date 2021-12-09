@@ -1,6 +1,6 @@
 #!/bin/sh
 
-SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 &&  pwd -P )"
+SCRIPT_PATH="$( cd -- "$(dirname "$0")" &> /dev/null &&  pwd -P )"
 
 ln -s $SCRIPT_PATH/.gitconfig ~/.gitconfig
 ln -s $SCRIPT_PATH/.gitignore_global ~/.gitignore_global
