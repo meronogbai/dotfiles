@@ -1,9 +1,9 @@
 #!/bin/sh
 
-RELATIVE_PATH=`dirname "$0"`
-ABSOLUTE_PATH=`(cd $RELATIVE_PATH && pwd)`
-ln -s $ABSOLUTE_PATH/.gitconfig ~/.gitconfig
-ln -s $ABSOLUTE_PATH/.gitignore_global ~/.gitignore_global
-ln -s $ABSOLUTE_PATH/.p10k.zsh ~/.p10k.zsh
-ln -s $ABSOLUTE_PATH/.vimrc ~/.vimrc
-ln -s $ABSOLUTE_PATH/.zshrc ~/.zshrc
+SCRIPT_PATH="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 &&  pwd -P )"
+
+ln -s $SCRIPT_PATH/.gitconfig ~/.gitconfig
+ln -s $SCRIPT_PATH/.gitignore_global ~/.gitignore_global
+ln -s $SCRIPT_PATH/.p10k.zsh ~/.p10k.zsh
+ln -s $SCRIPT_PATH/.vimrc ~/.vimrc
+ln -s $SCRIPT_PATH/.zshrc ~/.zshrc
