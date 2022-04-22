@@ -37,6 +37,7 @@ antigen apply
 
 # Environment variables
 export PATH="$PATH:$(yarn global bin)"
+export TERM="xterm-256color"
 
 # Aliases
 alias y='yarn'
