@@ -36,7 +36,6 @@ antigen theme romkatv/powerlevel10k
 antigen apply
 
 # Environment variables
-export EDITOR='vim'
 export PATH="$PATH:$(yarn global bin)"
 
 # Aliases
