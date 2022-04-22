@@ -35,7 +35,12 @@ antigen theme romkatv/powerlevel10k
 
 antigen apply
 
+# Environment variables
 export EDITOR='vim'
+export PATH="$PATH:$(yarn global bin)"
+
+# Aliases
+alias y='yarn'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
