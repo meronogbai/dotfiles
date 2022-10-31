@@ -5,6 +5,12 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
+# Environment variables
+export N_PREFIX="$HOME/.n"
+export PATH="$HOME/.n/bin:$PATH"
+export PATH="$PATH:$(yarn global bin)"
+export EDITOR="nvim"
+
 # Enable Homebrew's completions
 if type brew &>/dev/null
 then
@@ -35,12 +41,6 @@ EOBUNDLES
 antigen theme romkatv/powerlevel10k
 
 antigen apply
-
-# Environment variables
-export N_PREFIX="$HOME/.n"
-export PATH="$HOME/.n/bin:$PATH"
-export PATH="$PATH:$(yarn global bin)"
-export EDITOR="nvim"
 
 # Aliases
 alias ls='lsd'
