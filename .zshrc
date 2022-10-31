@@ -43,7 +43,8 @@ export PATH="$PATH:$(yarn global bin)"
 export EDITOR="nvim"
 
 # Aliases
-alias ls='exa --icons'
+alias ls='lsd'
+alias tree='lsd --tree'
 alias y='yarn'
 alias t='tmux'
 alias up='brew update && brew upgrade'
