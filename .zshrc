@@ -52,6 +52,7 @@ alias gdcp='git --no-pager diff | pbcopy'
 alias gcnt='git --no-pager diff --stat'
 alias gcntm='gcnt main'
 alias vim='nvim'
+alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
