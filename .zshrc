@@ -6,10 +6,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # Environment variables
-export N_PREFIX="$HOME/.n"
-export PATH="$HOME/.n/bin:$PATH"
-export PATH="$PATH:$(yarn global bin)"
-export EDITOR="nvim"
+export EDITOR='nvim'
+export LC_ALL='en_US.UTF-8'
+export LANG='en_US.UTF-8'
+export PATH="$HOME/.n/bin:$PATH" # https://github.com/tj/n
 
 # Enable Homebrew's completions
 if type brew &>/dev/null
@@ -36,6 +36,8 @@ antigen bundles <<EOBUNDLES
   colored-man-pages
   tmux
   docker
+  yarn
+  fzf
 EOBUNDLES
 
 antigen theme romkatv/powerlevel10k
@@ -45,14 +47,14 @@ antigen apply
 # Aliases
 alias ls='lsd'
 alias tree='lsd --tree'
-alias y='yarn'
 alias t='tmux'
 alias up='brew update && brew upgrade'
 alias gdcp='git --no-pager diff | pbcopy'
 alias gcnt='git --no-pager diff --stat'
 alias gcntm='gcnt main'
 alias vim='nvim'
-alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f'
+alias drp='docker system prune --all --volumes'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
