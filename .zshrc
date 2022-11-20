@@ -9,7 +9,8 @@ fi
 export EDITOR='nvim'
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
-export PATH="$HOME/.n/bin:$PATH" # https://github.com/tj/n
+export N_PREFIX="$HOME/.n"
+export PATH="$N_PREFIX/bin:$PATH" # https://github.com/tj/n
 
 # Enable Homebrew's completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
