@@ -12,13 +12,8 @@ export LANG='en_US.UTF-8'
 export PATH="$HOME/.n/bin:$PATH" # https://github.com/tj/n
 
 # Enable Homebrew's completions
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-
-  autoload -Uz compinit
-  compinit
-fi
+# See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
+FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
 # Antigen
 source $(brew --prefix)/share/antigen/antigen.zsh
