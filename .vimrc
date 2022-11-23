@@ -13,3 +13,5 @@ set smartindent
 set termguicolors
 set showtabline=2
 inoremap jj <Esc>
+" Disable worst feature in vim
+vnoremap p "_dP
