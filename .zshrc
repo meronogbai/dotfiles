@@ -30,7 +30,6 @@ antigen bundles <<EOBUNDLES
   z
   colored-man-pages
   tmux
-  docker
   yarn
   fzf
 EOBUNDLES
@@ -53,3 +52,5 @@ alias drp='docker system prune --all --volumes'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source /Users/meron/.docker/init-zsh.sh || true # Added by Docker Desktop
