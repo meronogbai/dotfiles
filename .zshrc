@@ -10,9 +10,9 @@ export EDITOR='nvim'
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
 
-# Enable Homebrew's completions
+# Enable zsh completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+FPATH="$(brew --prefix)/share/zsh/site-functions:${HOME}/.zfunc:${FPATH}"
 
 # Antigen
 source $(brew --prefix)/share/antigen/antigen.zsh
