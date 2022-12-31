@@ -9,6 +9,7 @@ fi
 export EDITOR='nvim'
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
+export PATH="${HOME}/bin:${PATH}"
 
 # Enable zsh completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
