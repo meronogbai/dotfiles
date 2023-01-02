@@ -12,6 +12,7 @@ set autoindent
 set smartindent
 set termguicolors
 set showtabline=2
+set nohlsearch
 inoremap jj <Esc>
 " Disable worst feature in vim
 vnoremap p "_dP
