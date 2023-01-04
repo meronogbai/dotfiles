@@ -50,6 +50,7 @@ alias gcntm='gcnt main'
 alias vim='nvim'
 alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f'
 alias drp='docker system prune --all --volumes'
+alias isodate='date -u +%FT%T%z'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
