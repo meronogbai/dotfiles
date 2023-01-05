@@ -57,12 +57,17 @@ lsp.setup_nvim_cmp({
 
 lsp.setup()
 
-local mason_nullls = require("mason-null-ls")
+local null_ls = require('null-ls')
+local mason_null_ls = require("mason-null-ls")
 
-mason_nullls.setup({
+mason_null_ls.setup({
   automatic_installation = true,
   automatic_setup = true,
-  ensure_installed = { 'prettierd' }
+  ensure_installed = { 'prettierd', 'cspell' },
 })
 
-mason_nullls.setup_handlers({})
+mason_null_ls.setup_handlers({})
+
+null_ls.setup({
+  fallback_severity = vim.diagnostic.severity.INFO,
+})
