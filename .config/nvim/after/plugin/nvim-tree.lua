@@ -1,28 +1,29 @@
 local nvim_tree = require("nvim-tree")
-local nvim_tree_config = require("nvim-tree.config")
+local api = require('nvim-tree.api')
 
-local tree_cb = nvim_tree_config.nvim_tree_callback
+local function on_attach(bufnr)
+  local function opts(desc)
+    return { desc = 'nvim-tree: ' .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+  end
+
+  api.config.mappings.default_on_attach(bufnr)
+
+  vim.keymap.set('n', '<leader>e', function()
+    api.tree.toggle(true)
+  end)
+
+  vim.keymap.set('n', 'l', api.node.open.edit)
+  vim.keymap.set('n', 'h', api.node.navigate.parent_close)
+end
 
 nvim_tree.setup {
-  disable_netrw = true,
-  hijack_netrw = true,
-  diagnostics = {
-    enable = true
-  },
-  view = {
-    mappings = {
-      custom_only = false,
-      list = {
-        { key = { "l", "<CR>", "o" }, cb = tree_cb 'edit' },
-        { key = 'h', cb = tree_cb 'close_node' },
-        { key = 'v', cb = tree_cb 'vsplit' },
-      }
-    },
-  },
+    on_attach = on_attach
 }
 
-vim.keymap.set('n', '<leader>e',
-  function()
-    nvim_tree.toggle(true, false)
-  end
-)
+
+local function open_nvim_tree()
+  -- always open the tree
+  api.tree.open()
+end
+
+vim.api.nvim_create_autocmd({ "VimEnter" }, { callback = open_nvim_tree })
