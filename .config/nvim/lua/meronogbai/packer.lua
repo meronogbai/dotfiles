@@ -11,7 +11,7 @@ return require('packer').startup(function(use)
   use 'mg979/vim-visual-multi'
 
   -- Icons
-  use 'kyazdani42/nvim-web-devicons'
+  use 'nvim-tree/nvim-web-devicons'
 
   -- Statusline
   use 'nvim-lualine/lualine.nvim'
@@ -52,6 +52,7 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
   use 'JoosepAlviste/nvim-ts-context-commentstring'
 
+  -- Autopairs - useful for html and jsx
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
 
@@ -59,11 +60,21 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  -- File explore
   use 'nvim-tree/nvim-tree.lua'
 
+  -- Bufferline
   use 'akinsho/bufferline.nvim'
+
+  -- Color highlither for css
   use 'norcalli/nvim-colorizer.lua'
 
+  -- Helps with finding errors
   use 'folke/trouble.nvim'
+
+  -- Git integration
   use 'lewis6991/gitsigns.nvim'
+
+  -- Startscreen
+  use 'goolord/alpha-nvim'
 end)
