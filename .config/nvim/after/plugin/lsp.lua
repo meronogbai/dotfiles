@@ -40,22 +40,6 @@ lsp.configure('jsonls', {
           fileMatch = { ".eslintrc", ".eslintrc.json" },
           url = "https://json.schemastore.org/eslintrc.json"
         },
-        {
-          fileMatch = { ".babelrc", ".babelrc.json", "babel.config.json" },
-          url = "https://json.schemastore.org/babelrc.json"
-        },
-        {
-          fileMatch = { "now.json", "vercel.json" },
-          url = "https://json.schemastore.org/now.json"
-        },
-        {
-          fileMatch = {
-            ".stylelintrc",
-            ".stylelintrc.json",
-            "stylelint.config.json"
-          },
-          url = "http://json.schemastore.org/stylelintrc.json"
-        }
       }
     }
   }
@@ -72,14 +56,12 @@ lsp.configure('yamlls', {
         ["http://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
         ["http://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
         ["http://json.schemastore.org/prettierrc.json"] = ".prettierrc.{yml,yaml}",
-        ["http://json.schemastore.org/stylelintrc.json"] = ".stylelintrc.{yml,yaml}",
       }
     }
   }
 })
 
 lsp.set_preferences({
-  set_lsp_keymaps = false,
   sign_icons = { error = "", warn = "", hint = "", info = "" },
 })
 
@@ -93,17 +75,7 @@ lsp.on_attach(function(client, bufnr)
     })
   end
 
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-  vim.keymap.set('n', 'gh', vim.lsp.buf.hover, bufopts)
-  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-  vim.keymap.set('n', 'gs', vim.lsp.buf.signature_help, bufopts)
-  vim.keymap.set('n', 'gl', vim.diagnostic.open_float, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
+  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, { buffer = bufnr })
 end)
 
 lsp.setup_nvim_cmp({
