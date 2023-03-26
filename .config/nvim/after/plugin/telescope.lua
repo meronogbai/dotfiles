@@ -13,13 +13,14 @@ telescope.setup {
       n = {
         q = actions.close
       }
-    }
+    },
+    file_ignore_patterns = { ".git/" }
   },
   pickers = {
     find_files = {
       hidden = true
     }
-  }
+  },
 }
 
 telescope.load_extension('fzf')
