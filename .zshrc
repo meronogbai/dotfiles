@@ -51,6 +51,7 @@ alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && doc
 alias drp='docker system prune --all --volumes'
 alias dco='docker-compose'
 alias isodate='date -u +%FT%T%z'
+alias lg='lazygit'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
