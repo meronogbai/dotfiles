@@ -75,7 +75,18 @@ lsp.on_attach(function(client, bufnr)
     })
   end
 
-  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, { buffer = bufnr })
+
+  -- Fix eslint errors on save
+  vim.api.nvim_create_autocmd('BufWritePre', {
+    pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
+    command = 'silent! EslintFixAll',
+    group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
+  })
+
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
+  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
 end)
 
 lsp.setup_nvim_cmp({
