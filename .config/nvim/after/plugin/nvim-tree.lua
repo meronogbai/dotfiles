@@ -3,7 +3,7 @@ local api = require("nvim-tree.api");
 
 nvim_tree.setup {
   filters = {
-    custom = { "^\\.git$" }
+    custom = { "^\\.git$", ".DS_Store" }
   },
   git = {
     ignore = false
