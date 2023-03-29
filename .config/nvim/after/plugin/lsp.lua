@@ -65,7 +65,7 @@ lsp.set_preferences({
   sign_icons = { error = "", warn = "", hint = "", info = "" },
 })
 
-lsp.on_attach(function(client, bufnr)
+local on_attach = function(client, bufnr)
   -- Enable format on save
   if client.server_capabilities.documentFormattingProvider then
     vim.api.nvim_create_autocmd("BufWritePre", {
@@ -87,7 +87,9 @@ lsp.on_attach(function(client, bufnr)
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
-end)
+end
+
+lsp.on_attach(on_attach)
 
 lsp.setup_nvim_cmp({
   formatting = {
@@ -98,7 +100,17 @@ lsp.setup_nvim_cmp({
   }
 })
 
+lsp.skip_server_setup({ 'tsserver' })
+
 lsp.setup()
+
+-- Add extra typescript functionality
+require('typescript').setup({
+  debug = false,
+  server = lsp.build_options('tsserver', {})
+})
+
+vim.keymap.set('n', '<leader>rnf', '<cmd>TypescriptRenameFile<CR>')
 
 local null_ls = require('null-ls')
 local mason_null_ls = require("mason-null-ls")
