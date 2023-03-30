@@ -67,7 +67,7 @@ return require('packer').startup(function(use)
   -- Bufferline
   use 'akinsho/bufferline.nvim'
 
-  -- Color highlither for css
+  -- Color highlighter for css
   use 'norcalli/nvim-colorizer.lua'
 
   -- Helps with finding errors
