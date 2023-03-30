@@ -75,14 +75,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-
-  -- Fix eslint errors on save
-  vim.api.nvim_create_autocmd('BufWritePre', {
-    pattern = { '*.tsx', '*.ts', '*.jsx', '*.js' },
-    command = 'silent! EslintFixAll',
-    group = vim.api.nvim_create_augroup('MyAutocmdsJavaScripFormatting', {}),
-  })
-
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
@@ -121,8 +113,28 @@ mason_null_ls.setup({
   ensure_installed = { 'prettierd', 'cspell' },
 })
 
-mason_null_ls.setup_handlers({})
+mason_null_ls.setup_handlers {
+  function(source_name, methods)
+    -- all sources with no handler get passed here
 
-null_ls.setup({
-  fallback_severity = vim.diagnostic.severity.INFO,
+    -- To keep the original functionality of `automatic_setup = true`,
+    -- please add the below.
+    require("mason-null-ls.automatic_setup")(source_name, methods)
+  end,
+  cspell = function(source_name, methods)
+    null_ls.register(null_ls.builtins.diagnostics.cspell.with {
+      extra_args = { "--config", "~/.cspell.json" },
+      diagnostics_postprocess = function(diagnostic)
+        diagnostic.severity = vim.diagnostic.severity["INFO"]
+      end,
+    })
+    null_ls.register(null_ls.builtins.code_actions.cspell)
+  end,
+}
+
+null_ls.setup()
+
+vim.diagnostic.config({
+  virtual_text = true,
+  update_in_insert = true
 })
