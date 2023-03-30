@@ -2,7 +2,7 @@ local lsp = require('lsp-zero')
 
 lsp.preset('recommended')
 
-lsp.ensure_installed({ "tsserver", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "eslint", "yamlls", "jsonls" })
+lsp.ensure_installed({ "tsserver", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "yamlls", "jsonls" })
 
 lsp.configure('lua_ls', {
   settings = {
@@ -110,7 +110,7 @@ local mason_null_ls = require("mason-null-ls")
 mason_null_ls.setup({
   automatic_installation = true,
   automatic_setup = true,
-  ensure_installed = { 'prettierd', 'cspell' },
+  ensure_installed = { 'prettierd', 'cspell', 'eslint_d' },
 })
 
 mason_null_ls.setup_handlers {
