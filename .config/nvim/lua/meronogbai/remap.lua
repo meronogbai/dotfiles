@@ -17,5 +17,10 @@ vim.keymap.set('n', '<C-l>', '<C-w>l', {})
 -- Press jj to Escape
 vim.keymap.set("i", "jj", "<Esc>")
 
+-- Visual --
+-- Stay in indent mode
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
 -- Disable worst feature in vim
 vim.keymap.set("v", "p", '"_dP')
