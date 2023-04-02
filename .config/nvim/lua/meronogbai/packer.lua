@@ -75,7 +75,6 @@ return require('packer').startup(function(use)
 
   -- Git integration
   use 'lewis6991/gitsigns.nvim'
-  use 'kdheepak/lazygit.nvim'
 
   -- Startscreen
   use 'goolord/alpha-nvim'
