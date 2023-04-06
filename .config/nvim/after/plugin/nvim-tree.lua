@@ -1,5 +1,7 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+-- Comenting out the following lines will disable the netrw.
+-- I need netrw for gx
+-- vim.g.loaded_netrw = 1
+-- vim.g.loaded_netrwPlugin = 1
 
 local nvim_tree = require('nvim-tree')
 local api = require("nvim-tree.api");
