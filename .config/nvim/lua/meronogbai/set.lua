@@ -13,4 +13,6 @@ vim.opt.termguicolors = true
 vim.opt.showtabline = 2
 vim.opt.signcolumn = "yes"
 vim.g.mapleader = " "
-vim.cmd [[set nohlsearch]]
+vim.opt.smartcase = true
+vim.opt.ignorecase = true
+vim.opt.hlsearch = false
