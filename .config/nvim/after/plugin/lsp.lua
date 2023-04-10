@@ -102,26 +102,18 @@ mason_null_ls.setup({
   automatic_installation = true,
   automatic_setup = true,
   ensure_installed = { 'prettierd', 'cspell', 'eslint_d' },
+  handlers = {
+    cspell = function()
+      null_ls.register(null_ls.builtins.diagnostics.cspell.with {
+        extra_args = { "--config", "~/.cspell.json" },
+        diagnostics_postprocess = function(diagnostic)
+          diagnostic.severity = vim.diagnostic.severity["INFO"]
+        end,
+      })
+      null_ls.register(null_ls.builtins.code_actions.cspell)
+    end,
+  }
 })
-
-mason_null_ls.setup_handlers {
-  function(source_name, methods)
-    -- all sources with no handler get passed here
-
-    -- To keep the original functionality of `automatic_setup = true`,
-    -- please add the below.
-    require("mason-null-ls.automatic_setup")(source_name, methods)
-  end,
-  cspell = function(source_name, methods)
-    null_ls.register(null_ls.builtins.diagnostics.cspell.with {
-      extra_args = { "--config", "~/.cspell.json" },
-      diagnostics_postprocess = function(diagnostic)
-        diagnostic.severity = vim.diagnostic.severity["INFO"]
-      end,
-    })
-    null_ls.register(null_ls.builtins.code_actions.cspell)
-  end,
-}
 
 null_ls.setup()
 
