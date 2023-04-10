@@ -77,7 +77,4 @@ return require('packer').startup(function(use)
 
   -- Startscreen
   use 'goolord/alpha-nvim'
-
-  -- Github copilot
-  use 'github/copilot.vim'
 end)
