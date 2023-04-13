@@ -77,4 +77,7 @@ return require('packer').startup(function(use)
 
   -- Startscreen
   use 'goolord/alpha-nvim'
+
+  -- tmux integration
+  use 'christoomey/vim-tmux-navigator'
 end)

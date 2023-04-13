@@ -8,3 +8,8 @@ ln -sf "$SCRIPT_PATH"/.p10k.zsh ~/.p10k.zsh
 ln -sf "$SCRIPT_PATH"/.zshrc ~/.zshrc
 ln -sf "$SCRIPT_PATH"/.config/nvim ~/.config/nvim
 
+# tmux
+rm -rf ~/.tmux
+git clone https://github.com/gpakosz/.tmux.git ~/.tmux
+ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
+ln -sf "$SCRIPT_PATH"/.tmux.conf.local ~/.tmux.conf.local
