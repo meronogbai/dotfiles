@@ -7,6 +7,7 @@ ln -sf "$SCRIPT_PATH"/.gitignore_global ~/.gitignore_global
 ln -sf "$SCRIPT_PATH"/.p10k.zsh ~/.p10k.zsh
 ln -sf "$SCRIPT_PATH"/.zshrc ~/.zshrc
 ln -sf "$SCRIPT_PATH"/.config/nvim ~/.config
+ln -sf "$SCRIPT_PATH"/.config/kitty ~/.config
 
 # tmux
 rm -rf ~/.tmux
