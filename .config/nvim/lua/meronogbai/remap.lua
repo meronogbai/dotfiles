@@ -17,7 +17,3 @@ vim.keymap.set("v", ">", ">gv")
 
 -- Disable worst feature in vim
 vim.keymap.set("v", "p", '"_dP')
-
--- Command --
--- wd = write and delete buffer
-vim.keymap.set('c', 'wd', 'w | bd')
