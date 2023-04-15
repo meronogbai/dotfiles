@@ -12,6 +12,7 @@ export LANG='en_US.UTF-8'
 export PATH="${HOME}/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export NVM_AUTO_USE=true
 
 # Enable zsh completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
@@ -50,7 +51,6 @@ alias vim='nvim'
 alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f'
 alias drp='docker system prune --all --volumes'
 alias dco='docker-compose'
-alias isodate='date -u +%FT%T%z'
 alias lg='lazygit'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
