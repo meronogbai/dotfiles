@@ -29,11 +29,9 @@ antigen bundles <<EOBUNDLES
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
   git
-  sudo
   history-substring-search
   z
   colored-man-pages
-  tmux
   yarn
   fzf
 EOBUNDLES
@@ -52,6 +50,11 @@ alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && doc
 alias drp='docker system prune --all --volumes'
 alias dco='docker-compose'
 alias lg='lazygit'
+alias t='tmux'
+alias tl='tmux list-sessions'
+alias ts='tmux new-session -s'
+alias ta='tmux attach -t'
+alias cls='clear && tmux clear-history'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

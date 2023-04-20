@@ -46,6 +46,7 @@ return require('packer').startup(function(use)
 
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use 'nvim-treesitter/nvim-treesitter-context'
 
   -- Comment with gc
   use 'numToStr/Comment.nvim'

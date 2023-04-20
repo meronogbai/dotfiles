@@ -6,6 +6,10 @@
 --   term_mode = "t",
 --   command_mode = "c",
 
+-- Normal --
+-- Delete all buffers
+vim.keymap.set('n', '<leader>da', "<cmd>bufdo bd<cr>")
+
 -- Insert --
 -- Press jj to Escape
 vim.keymap.set("i", "jj", "<Esc>")
