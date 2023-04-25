@@ -67,7 +67,7 @@ tmux_conf_24b_colour=auto
 #   - tmux_conf_theme_synchronized
 tmux_conf_theme=enabled
 
-# default theme
+# tokyonight
 tmux_conf_theme_colour_1="#15161E"    # dark gray
 tmux_conf_theme_colour_2="#545c7e"    # gray
 tmux_conf_theme_colour_3="#a9b1d6"    # light gray
@@ -163,7 +163,7 @@ tmux_conf_theme_status_attr="none"
 #     - #{hostname_full_ssh}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_terminal_title="#h ❐ #S ● #I #W"
+tmux_conf_theme_terminal_title=" ❐ #S #{b:pane_current_path} ● #I #W"
 
 # window status style
 #   - built-in variables are:
@@ -252,7 +252,7 @@ tmux_conf_theme_right_separator_sub="|"
 #     - #{uptime_s}
 #     - #{username}
 #     - #{username_ssh}
-tmux_conf_theme_status_left=" ❐ #S "
+tmux_conf_theme_status_left=" ❐ #S #{b:pane_current_path} "
 tmux_conf_theme_status_right=" #{prefix}#{mouse}#{pairing}#{synchronized}#{?battery_status,#{battery_status},}#{?battery_bar, #{battery_bar},}#{?battery_percentage, #{battery_percentage},} , %I:%M %p , %d %b |"
 
 # status left style
