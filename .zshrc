@@ -12,7 +12,9 @@ export LANG='en_US.UTF-8'
 export PATH="${HOME}/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export NVM_AUTO_USE=true
+
+# Version managers
+eval "$(fnm env --use-on-cd)"
 
 # Enable zsh completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
@@ -24,7 +26,6 @@ source $(brew --prefix)/share/antigen/antigen.zsh
 antigen use oh-my-zsh
 
 antigen bundles <<EOBUNDLES
-  lukechilds/zsh-nvm
   zsh-users/zsh-syntax-highlighting
   zsh-users/zsh-autosuggestions
   zsh-users/zsh-completions
