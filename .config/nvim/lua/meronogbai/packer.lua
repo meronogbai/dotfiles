@@ -58,6 +58,7 @@ return require('packer').startup(function(use)
 
   -- Telescope
   use 'nvim-telescope/telescope.nvim'
+  use 'nvim-telescope/telescope-project.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- File explorer

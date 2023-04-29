@@ -6,7 +6,15 @@ vim.keymap.set('n', '<leader>fg', builtin.live_grep)
 vim.keymap.set('n', '<leader>fb', builtin.buffers)
 vim.keymap.set('n', '<leader>fr', builtin.oldfiles)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags)
+vim.keymap.set('n', '<leader>fp', telescope.extensions.project.project)
 
-telescope.setup()
+telescope.setup {
+  extensions = {
+    project = {
+      sync_with_nvim_tree = true,
+    }
+  }
+}
 
 telescope.load_extension('fzf')
+telescope.load_extension('project')
