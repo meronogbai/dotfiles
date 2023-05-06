@@ -17,12 +17,12 @@ local dashboard = require("alpha.themes.dashboard")
 dashboard.section.buttons.val = {
   dashboard.button("e", "  New file", "<cmd>ene<CR>"),
   dashboard.button("SPC f f", "  Find file"),
-  dashboard.button("SPC f g", "  Live grep"),
-  dashboard.button("SPC f r", "  Recent files"),
+  dashboard.button("SPC f g", "󰍉  Live grep"),
+  dashboard.button("SPC f r", "  Recent files"),
   dashboard.button("SPC f p", "  Find project"),
   dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
   dashboard.button("u", "  Update plugins", "<cmd>PackerSync<CR>"),
-  dashboard.button("q", "  Quit", ":qa<CR>"),
+  dashboard.button("q", "󰗼  Quit", ":qa<CR>"),
 }
 
 local function footer()

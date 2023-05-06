@@ -62,7 +62,7 @@ lsp.configure('yamlls', {
 })
 
 lsp.set_preferences({
-  sign_icons = { error = "", warn = "", hint = "", info = "" },
+  sign_icons = { error = "", warn = "", hint = "󰌶", info = "" },
 })
 
 local on_attach = function(client, bufnr)
