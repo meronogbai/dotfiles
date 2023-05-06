@@ -10,6 +10,12 @@ return require('packer').startup(function(use)
   -- Multi-cursor support with <C-n>
   use 'mg979/vim-visual-multi'
 
+  -- Surround
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+  })
+
   -- Icons
   use 'nvim-tree/nvim-web-devicons'
 
