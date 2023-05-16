@@ -7,20 +7,8 @@ return require('packer').startup(function(use)
   -- Shared utils
   use 'nvim-lua/plenary.nvim'
 
-  -- Multi-cursor support with <C-n>
-  use 'mg979/vim-visual-multi'
-
-  -- Surround
-  use({
-    "kylechui/nvim-surround",
-    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
-  })
-
   -- Icons
   use 'nvim-tree/nvim-web-devicons'
-
-  -- Statusline
-  use 'nvim-lualine/lualine.nvim'
 
   -- Colorscheme
   use 'folke/tokyonight.nvim'
@@ -54,10 +42,6 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-context'
 
-  -- Comment with gc
-  use 'numToStr/Comment.nvim'
-  use 'JoosepAlviste/nvim-ts-context-commentstring'
-
   -- Autopairs - useful for html and jsx
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
@@ -67,25 +51,41 @@ return require('packer').startup(function(use)
   use 'nvim-telescope/telescope-project.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
+  -- Git integration
+  use 'lewis6991/gitsigns.nvim'
+  use 'kdheepak/lazygit.nvim'
+
+  -- tmux integration
+  use 'christoomey/vim-tmux-navigator'
+
+  -- Comment with gc
+  use 'numToStr/Comment.nvim'
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
+
+  -- Multi-cursor support with <C-n>
+  use 'mg979/vim-visual-multi'
+
+  -- Statusline
+  use 'nvim-lualine/lualine.nvim'
+
   -- File explorer
   use 'nvim-tree/nvim-tree.lua'
 
   -- Bufferline
   use 'akinsho/bufferline.nvim'
 
-  -- Color highlighter for css
-  use 'norcalli/nvim-colorizer.lua'
-
   -- Helps with finding errors
   use 'folke/trouble.nvim'
 
-  -- Git integration
-  use 'lewis6991/gitsigns.nvim'
-  use 'kdheepak/lazygit.nvim'
+  -- Color highlighter for css
+  use 'norcalli/nvim-colorizer.lua'
 
   -- Startscreen
   use 'goolord/alpha-nvim'
 
-  -- tmux integration
-  use 'christoomey/vim-tmux-navigator'
+  -- Surround
+  use({
+    "kylechui/nvim-surround",
+    tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+  })
 end)
