@@ -10,7 +10,5 @@ ln -sf "$SCRIPT_PATH"/.config/nvim ~/.config
 ln -sf "$SCRIPT_PATH"/.config/kitty ~/.config
 
 # tmux
-rm -rf ~/.tmux
-git clone https://github.com/gpakosz/.tmux.git ~/.tmux
-ln -sf ~/.tmux/.tmux.conf ~/.tmux.conf
+ln -sf "$SCRIPT_PATH"/.tmux/.tmux.conf ~/.tmux.conf # tracked by submodule
 ln -sf "$SCRIPT_PATH"/.tmux.conf.local ~/.tmux.conf.local
