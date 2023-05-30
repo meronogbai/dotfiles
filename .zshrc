@@ -55,7 +55,6 @@ alias t='tmux'
 alias tl='tmux list-sessions'
 alias ts='tmux new-session -s'
 alias ta='tmux attach -t'
-alias cls='clear && tmux clear-history'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
