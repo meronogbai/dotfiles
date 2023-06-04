@@ -21,6 +21,13 @@ return require('packer').startup(function(use)
   use 'jayp0521/mason-null-ls.nvim'
   use 'jose-elias-alvarez/typescript.nvim'
 
+  -- DAP
+  use 'mfussenegger/nvim-dap'
+  use 'rcarriga/nvim-dap-ui'
+  use 'theHamsta/nvim-dap-virtual-text'
+  use 'nvim-telescope/telescope-dap.nvim'
+  use 'jay-babu/mason-nvim-dap.nvim'
+
   -- Completions
   use 'hrsh7th/nvim-cmp'
   use 'hrsh7th/cmp-buffer'
