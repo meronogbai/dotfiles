@@ -14,7 +14,16 @@ telescope.setup {
   pickers = {
     find_files = {
       hidden = true
-    }
+    },
+    live_grep = {
+      additional_args = function(_)
+        return { "--hidden" }
+      end
+    },
+  },
+  defaults = {
+    file_ignore_patterns = { "^node_modules/", "^.git/" },
+    prompt_prefix = "🔍"
   },
   extensions = {
     project = {
