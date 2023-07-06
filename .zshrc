@@ -49,7 +49,7 @@ alias gdcp='git --no-pager diff | pbcopy'
 alias vim='nvim'
 alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker volume prune -f'
 alias drp='docker system prune --all --volumes'
-alias dco='docker-compose'
+alias dco='docker compose'
 alias lg='lazygit'
 alias t='tmux'
 alias tl='tmux list-sessions'
@@ -58,5 +58,3 @@ alias ta='tmux attach -t'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-source /Users/meron/.docker/init-zsh.sh || true # Added by Docker Desktop
