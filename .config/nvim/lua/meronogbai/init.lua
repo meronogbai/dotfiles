@@ -1,3 +1,3 @@
 require("meronogbai.set")
-require("meronogbai.remap")
+require("meronogbai.keymap")
 require("meronogbai.packer")
