@@ -8,7 +8,10 @@
 
 -- Normal --
 -- Delete all buffers
-vim.keymap.set('n', '<leader>da', "<cmd>bufdo bd<cr>")
+vim.keymap.set("n", "<leader>q", "<cmd>bd<cr>")
+vim.keymap.set("n", "<leader>da", "<cmd>bufdo bd<cr>")
+vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<cr>")
+vim.keymap.set("n", "<leader>s", "<cmd>:split<cr>")
 
 -- Insert --
 -- Press jj to Escape
