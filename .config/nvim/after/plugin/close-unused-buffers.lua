@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd({ "BufRead" }, {
 })
 
 -- Close unused buffers
-vim.keymap.set('n', '<leader>b',
+vim.keymap.set('n', '<leader>bu',
   function()
     local curbufnr = vim.api.nvim_get_current_buf()
     local buflist = vim.api.nvim_list_bufs()
@@ -28,3 +28,8 @@ vim.keymap.set('n', '<leader>b',
       end
     end
   end, { silent = true, desc = 'Close unused buffers' })
+
+-- Delete current buffer
+vim.keymap.set("n", "<leader>bc", "<cmd>bd!<cr>")
+-- Delete all buffers
+vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bd<cr>")
