@@ -13,6 +13,10 @@ export PATH="${HOME}/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
+# Save history to log files
+# See https://www.justinjoyce.dev/save-your-shell-history-to-log-files/
+preexec() {if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $ $3" >> ~/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi}
+
 # Version managers
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
