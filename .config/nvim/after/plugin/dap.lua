@@ -1,6 +1,6 @@
 local dap = require('dap')
 
-vim.keymap.set('n', '<leader>dct', dap.continue)
+vim.keymap.set('n', '<leader>dct', dap.continue) -- start new debugging session
 vim.keymap.set('n', '<leader>dsv', dap.step_over)
 vim.keymap.set('n', '<leader>dsi', dap.step_into)
 vim.keymap.set('n', '<leader>dso', dap.step_out)
