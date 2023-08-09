@@ -33,3 +33,5 @@ vim.keymap.set('n', '<leader>bu',
 vim.keymap.set("n", "<leader>bc", "<cmd>bd!<cr>")
 -- Delete all buffers
 vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bd<cr>")
+-- Delete all buffers except current
+vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")
