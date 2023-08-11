@@ -119,7 +119,15 @@ null_ls.setup()
 
 vim.diagnostic.config({
   virtual_text = true,
-  update_in_insert = true
+  update_in_insert = true,
+  float = {
+    focusable = true,
+    style = 'minimal',
+    border = 'rounded',
+    source = 'always',
+    header = '',
+    prefix = '',
+  }
 })
 
 -- Enable format on save
