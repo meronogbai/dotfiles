@@ -83,17 +83,7 @@ lsp.setup_nvim_cmp({
   }
 })
 
-lsp.skip_server_setup({ 'tsserver' })
-
 lsp.setup()
-
--- Add extra typescript functionality
-require('typescript').setup({
-  debug = false,
-  server = lsp.build_options('tsserver', {})
-})
-
-vim.keymap.set('n', '<leader>rnf', '<cmd>TypescriptRenameFile<CR>')
 
 local null_ls = require('null-ls')
 local mason_null_ls = require("mason-null-ls")
