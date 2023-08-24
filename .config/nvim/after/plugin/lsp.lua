@@ -61,15 +61,29 @@ lsp.configure('yamlls', {
   }
 })
 
+lsp.configure('cssls', {
+  settings = {
+    scss = {
+      lint = {
+        unknownAtRules = 'ignore' -- for tailwind's @apply rules
+      },
+    }
+  }
+})
+
 lsp.set_preferences({
   sign_icons = { error = "", warn = "", hint = "󰌶", info = "" },
 })
+
+local tailwindcss_colors = require("tailwindcss-colors")
+tailwindcss_colors.setup()
 
 local on_attach = function(client, bufnr)
   local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  tailwindcss_colors.buf_attach(bufnr)
 end
 
 lsp.on_attach(on_attach)

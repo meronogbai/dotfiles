@@ -83,8 +83,9 @@ return require('packer').startup(function(use)
   -- Helps with finding errors
   use 'folke/trouble.nvim'
 
-  -- Color highlighter for css
+  -- Colors
   use 'norcalli/nvim-colorizer.lua'
+  use 'themaxmarchuk/tailwindcss-colors.nvim'
 
   -- Startscreen
   use 'goolord/alpha-nvim'
