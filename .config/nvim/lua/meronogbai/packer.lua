@@ -48,6 +48,9 @@ return require('packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-context'
 
+  -- Folds
+  use { 'kevinhwang91/nvim-ufo', requires = 'kevinhwang91/promise-async' }
+
   -- Autopairs - useful for html and jsx
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
