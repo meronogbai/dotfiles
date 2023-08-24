@@ -75,25 +75,32 @@ lsp.set_preferences({
   sign_icons = { error = "", warn = "", hint = "󰌶", info = "" },
 })
 
-local tailwindcss_colors = require("tailwindcss-colors")
-tailwindcss_colors.setup()
-
 local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end,
     { silent = true, buffer = bufnr, desc = 'Format' })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = 'Rename' })
   vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = 'Code action' })
-  tailwindcss_colors.buf_attach(bufnr)
 end
 
 lsp.on_attach(on_attach)
 
+local lspkind = require('lspkind')
+local tailwind_cmp = require("tailwindcss-colorizer-cmp")
+
+tailwind_cmp.setup()
+
 lsp.setup_nvim_cmp({
   formatting = {
-    format = require('lspkind').cmp_format({
-      with_text = false,
-      maxwidth = 50,
-    })
+    format = function(entry, item)
+      local lspkind_formatter = lspkind.cmp_format({
+        with_text = false,
+        maxwidth = 50,
+      })
+
+      lspkind_formatter(entry, item)
+
+      return tailwind_cmp.formatter(entry, item)
+    end
   }
 })
 
