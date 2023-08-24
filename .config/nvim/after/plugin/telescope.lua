@@ -1,6 +1,5 @@
 local telescope = require('telescope')
 local builtin = require('telescope.builtin')
-local actions = require("telescope.actions")
 local trouble = require("trouble.providers.telescope")
 
 vim.keymap.set('n', '<leader>ff', builtin.find_files)
