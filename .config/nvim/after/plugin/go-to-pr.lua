@@ -6,4 +6,4 @@ vim.keymap.set('n', '<leader>pr', function()
   local commitHashCommand = 'git blame -L' .. lineNum .. ',' .. lineNum .. ' ' .. fileName .. " | awk '{print $1}'"
 
   vim.fn.system('gh search prs --web' .. ' `' .. commitHashCommand .. '`')
-end)
+end, { desc = 'Search for PR in github' })

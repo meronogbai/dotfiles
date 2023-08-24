@@ -17,4 +17,4 @@ nvim_tree.setup {
 
 vim.keymap.set('n', '<leader>e', function()
   api.tree.toggle(true, false)
-end)
+end, { desc = 'Toggle file explorer' })

@@ -5,5 +5,5 @@ require("bufferline").setup {
   },
 }
 
-vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>')
-vim.keymap.set('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>')
+vim.keymap.set('n', '<Tab>', '<cmd>BufferLineCycleNext<CR>', { desc = 'Go to next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>BufferLineCyclePrev<CR>', { desc = 'Go to previous buffer' })

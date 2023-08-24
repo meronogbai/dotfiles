@@ -30,8 +30,8 @@ vim.keymap.set('n', '<leader>bu',
   end, { silent = true, desc = 'Close unused buffers' })
 
 -- Delete current buffer
-vim.keymap.set("n", "<leader>bc", "<cmd>bd!<cr>")
+vim.keymap.set("n", "<leader>bc", "<cmd>bd!<cr>", { desc = 'Close current buffer' })
 -- Delete all buffers
-vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bd<cr>")
+vim.keymap.set("n", "<leader>ba", "<cmd>bufdo bd<cr>", { desc = 'Close all buffers' })
 -- Delete all buffers except current
-vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>")
+vim.keymap.set("n", "<leader>bo", "<cmd>%bd|e#|bd#<cr>", { desc = 'Close all buffers except current one' })

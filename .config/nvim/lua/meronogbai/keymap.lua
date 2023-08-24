@@ -7,14 +7,13 @@
 --   command_mode = "c",
 
 -- Normal --
-vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<cr>")
-vim.keymap.set("n", "<leader>s", "<cmd>:split<cr>")
-vim.keymap.set("n", "<leader>co", "<cmd>:copen<cr>")
-vim.keymap.set("n", "<leader>cc", "<cmd>:cclose<cr>")
+vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<cr>", { desc = 'Split window vertically' })
+vim.keymap.set("n", "<leader>s", "<cmd>:split<cr>", { desc = 'Split window horizontally' })
+vim.keymap.set("n", "<leader>co", "<cmd>:copen<cr>", { desc = 'Open quickfix window' })
+vim.keymap.set("n", "<leader>cc", "<cmd>:cclose<cr>", { desc = 'Close quickfix window' })
 
 -- Insert --
--- Press jj to Escape
-vim.keymap.set("i", "jj", "<Esc>")
+vim.keymap.set("i", "jj", "<Esc>", { desc = 'Esc' })
 
 -- Visual --
 -- Stay in indent mode

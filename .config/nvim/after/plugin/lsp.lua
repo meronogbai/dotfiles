@@ -79,10 +79,10 @@ local tailwindcss_colors = require("tailwindcss-colors")
 tailwindcss_colors.setup()
 
 local on_attach = function(client, bufnr)
-  local bufopts = { noremap = true, silent = true, buffer = bufnr }
-  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, bufopts)
-  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, bufopts)
-  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end,
+    { silent = true, buffer = bufnr, desc = 'Format' })
+  vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = 'Rename' })
+  vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, { silent = true, buffer = bufnr, desc = 'Code action' })
   tailwindcss_colors.buf_attach(bufnr)
 end
 
