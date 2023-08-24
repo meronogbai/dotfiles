@@ -9,6 +9,7 @@
 -- Normal --
 vim.keymap.set("n", "<leader>v", "<cmd>:vsplit<cr>")
 vim.keymap.set("n", "<leader>s", "<cmd>:split<cr>")
+vim.keymap.set("n", "<leader>co", "<cmd>:copen<cr>")
 vim.keymap.set("n", "<leader>cc", "<cmd>:cclose<cr>")
 
 -- Insert --
