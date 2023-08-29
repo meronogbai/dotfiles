@@ -89,7 +89,20 @@ local tailwind_cmp = require("tailwindcss-colorizer-cmp")
 
 tailwind_cmp.setup()
 
-lsp.setup_nvim_cmp({
+lsp.setup()
+
+local cmp = require('cmp')
+
+require('luasnip.loaders.from_vscode').lazy_load()
+
+cmp.setup({
+  sources = {
+    { name = 'path' },
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'luasnip' },
+    { name = 'nvim_lua' }
+  },
   formatting = {
     format = function(entry, item)
       local lspkind_formatter = lspkind.cmp_format({
@@ -103,8 +116,6 @@ lsp.setup_nvim_cmp({
     end
   }
 })
-
-lsp.setup()
 
 local null_ls = require('null-ls')
 local mason_null_ls = require("mason-null-ls")
