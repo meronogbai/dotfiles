@@ -25,7 +25,7 @@ telescope.setup {
   },
   defaults = {
     file_ignore_patterns = { "^node_modules/", "^.git/" },
-    prompt_prefix = "🔍",
+    prompt_prefix = " ",
     mappings = {
       i = { ["<c-t>"] = trouble.open_with_trouble },
       n = { ["<c-t>"] = trouble.open_with_trouble },
