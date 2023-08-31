@@ -99,4 +99,7 @@ return require('packer').startup(function(use)
     "kylechui/nvim-surround",
     tag = "*", -- Use for stability; omit to use `main` branch for the latest features
   })
+
+  -- Note taking with obsidian
+  use "epwalsh/obsidian.nvim"
 end)
