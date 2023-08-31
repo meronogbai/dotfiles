@@ -84,14 +84,13 @@ end
 
 lsp.on_attach(on_attach)
 
+lsp.setup()
+
+local cmp = require('cmp')
 local lspkind = require('lspkind')
 local tailwind_cmp = require("tailwindcss-colorizer-cmp")
 
 tailwind_cmp.setup()
-
-lsp.setup()
-
-local cmp = require('cmp')
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
