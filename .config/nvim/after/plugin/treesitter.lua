@@ -1,9 +1,9 @@
 require('nvim-treesitter.configs').setup {
-  ensure_installed = { "rust", "tsx", "lua", "json", "css" },
+  ensure_installed = { "rust", "tsx", "lua", "json", "css", "markdown", "markdown_inline" },
   auto_install = true,
   highlight = {
     enable = true,
-    additional_vim_regex_higlighting = false
+    additional_vim_regex_higlighting = { 'markdown' }
   },
   autotag = {
     enable = true

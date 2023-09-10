@@ -102,4 +102,10 @@ return require('packer').startup(function(use)
 
   -- Note taking with obsidian
   use "epwalsh/obsidian.nvim"
+
+  -- Markdown preview
+  use {
+    "iamcco/markdown-preview.nvim",
+    run = function() vim.fn["mkdp#util#install"]() end,
+  }
 end)
