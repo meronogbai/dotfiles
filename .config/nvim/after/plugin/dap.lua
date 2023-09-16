@@ -1,5 +1,43 @@
 local dap = require('dap')
 
+-- JS/TS Debugging
+require("dap-vscode-js").setup({
+  adapters = { 'pwa-node' },
+})
+
+for _, language in ipairs({ "typescript", "javascript" }) do
+  dap.configurations[language] = {
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Launch file",
+      program = "${file}",
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "attach",
+      name = "Attach",
+      processId = require 'dap.utils'.pick_process,
+      cwd = "${workspaceFolder}",
+    },
+    {
+      type = "pwa-node",
+      request = "launch",
+      name = "Debug Jest Tests",
+      runtimeExecutable = "node",
+      runtimeArgs = {
+        "./node_modules/jest/bin/jest.js",
+        "--runInBand",
+      },
+      rootPath = "${workspaceFolder}",
+      cwd = "${workspaceFolder}",
+      console = "integratedTerminal",
+      internalConsoleOptions = "neverOpen",
+    }
+  }
+end
+
 vim.keymap.set('n', '<leader>dct', dap.continue, { desc = "Start new debugging session" })
 vim.keymap.set('n', '<leader>dsv', dap.step_over)
 vim.keymap.set('n', '<leader>dsi', dap.step_into)
@@ -21,13 +59,6 @@ end)
 vim.keymap.set('n', '<leader>ds', function()
   widgets.centered_float(widgets.scopes)
 end)
-
-require('mason').setup()
-require('mason-nvim-dap').setup({
-  ensure_installed = { 'js', 'node2' },
-  -- leave empty or debugging typescript won't work for reasons beyond me :(
-  handlers = {}
-})
 
 local dapui = require('dapui')
 dapui.setup()

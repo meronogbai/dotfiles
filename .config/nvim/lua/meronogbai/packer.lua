@@ -25,7 +25,14 @@ return require('packer').startup(function(use)
   use 'rcarriga/nvim-dap-ui'
   use 'theHamsta/nvim-dap-virtual-text'
   use 'nvim-telescope/telescope-dap.nvim'
-  use 'jay-babu/mason-nvim-dap.nvim'
+
+  -- JS/TS Debugging
+  use 'mxsdev/nvim-dap-vscode-js'
+  use {
+    'microsoft/vscode-js-debug',
+    opt = true,
+    run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out'
+  }
 
   -- Completions
   use 'hrsh7th/nvim-cmp'
