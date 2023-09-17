@@ -38,33 +38,34 @@ for _, language in ipairs({ "typescript", "javascript" }) do
   }
 end
 
-vim.keymap.set('n', '<leader>dct', dap.continue, { desc = "Start new debugging session" })
+vim.keymap.set('n', '<leader>dc', dap.continue, { desc = "Start new debugging session" })
 vim.keymap.set('n', '<leader>dsv', dap.step_over)
 vim.keymap.set('n', '<leader>dsi', dap.step_into)
 vim.keymap.set('n', '<leader>dso', dap.step_out)
-vim.keymap.set('n', '<leader>dtb', dap.toggle_breakpoint)
-vim.keymap.set('n', '<leader>dtB', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end)
-vim.keymap.set('n', '<leader>dsb', dap.set_breakpoint)
-vim.keymap.set('n', '<leader>lp',
-  function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
-vim.keymap.set('n', '<leader>dr', dap.repl.open)
-vim.keymap.set('n', '<leader>dl', dap.run_last)
+vim.keymap.set('n', '<leader>db', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>dB', function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+  { desc = 'Set conditional breakpoint' })
+-- vim.keymap.set('n', '<leader>dsb', dap.set_breakpoint)
+-- vim.keymap.set('n', '<leader>lp',
+-- function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end)
+-- vim.keymap.set('n', '<leader>dr', dap.repl.open)
+-- vim.keymap.set('n', '<leader>dl', dap.run_last)
 
-local widgets = require('dap.ui.widgets');
-vim.keymap.set({ 'n', 'v' }, '<leader>dh', widgets.hover)
-vim.keymap.set({ 'n', 'v' }, '<leader>dp', widgets.preview)
-vim.keymap.set('n', '<leader>df', function()
-  widgets.centered_float(widgets.frames)
-end)
-vim.keymap.set('n', '<leader>ds', function()
-  widgets.centered_float(widgets.scopes)
-end)
+-- local widgets = require('dap.ui.widgets');
+-- vim.keymap.set({ 'n', 'v' }, '<leader>dh', widgets.hover)
+-- vim.keymap.set({ 'n', 'v' }, '<leader>dp', widgets.preview)
+-- vim.keymap.set('n', '<leader>df', function()
+--   widgets.centered_float(widgets.frames)
+-- end)
+-- vim.keymap.set('n', '<leader>ds', function()
+--   widgets.centered_float(widgets.scopes)
+-- end)
 
 local dapui = require('dapui')
 dapui.setup()
 
 vim.keymap.set('n', '<leader>do', dapui.open)
-vim.keymap.set('n', '<leader>dcl', dapui.close)
+vim.keymap.set('n', '<leader>dl', dapui.close)
 
 -- Open automatically when a new debug session is created
 dap.listeners.after.event_initialized["dapui_config"] = function()
