@@ -55,6 +55,7 @@ alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q) && doc
 alias drp='docker system prune --all --volumes'
 alias dco='docker compose'
 alias lg='lazygit'
+alias gt='git trim'
 alias t='tmux'
 alias tl='tmux list-sessions'
 alias ts='tmux new-session -s'
