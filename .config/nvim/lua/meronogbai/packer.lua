@@ -31,7 +31,7 @@ return require('packer').startup(function(use)
   use {
     'microsoft/vscode-js-debug',
     opt = true,
-    run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && mv dist out'
+    run = 'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && rm -r out && mv dist out && git restore package-lock.json'
   }
 
   -- Completions
