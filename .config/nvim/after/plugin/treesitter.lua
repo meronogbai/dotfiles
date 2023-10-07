@@ -6,7 +6,9 @@ require('nvim-treesitter.configs').setup {
     additional_vim_regex_higlighting = { 'markdown' }
   },
   autotag = {
-    enable = true
+    enable = true,
+    -- @see https://github.com/windwp/nvim-ts-autotag/issues/125
+    enable_close_on_slash = false,
   },
   context_commentstring = {
     enable = true
