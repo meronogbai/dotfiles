@@ -114,7 +114,7 @@ cmp.setup({
       return tailwind_cmp.formatter(entry, item)
     end
   },
-  mapping = cmp.mapping.preset.insert({
+  mapping = lsp.defaults.cmp_mappings({
     -- Scroll up and down in the completion documentation
     ['<C-u>'] = cmp.mapping.scroll_docs(-4),
     ['<C-d>'] = cmp.mapping.scroll_docs(4),
