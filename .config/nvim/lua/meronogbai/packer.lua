@@ -96,8 +96,6 @@ return require('packer').startup(function(use)
 
   -- Colorizer
   use 'NvChad/nvim-colorizer.lua'
-  use 'roobert/tailwindcss-colorizer-cmp.nvim'
-
   -- Startscreen
   use 'goolord/alpha-nvim'
 

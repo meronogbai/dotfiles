@@ -75,7 +75,7 @@ lsp.set_preferences({
   sign_icons = { error = "", warn = "", hint = "󰌶", info = "" },
 })
 
-local on_attach = function(client, bufnr)
+local on_attach = function(_client, bufnr)
   vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end,
     { silent = true, buffer = bufnr, desc = 'Format' })
   vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = 'Rename' })
@@ -88,9 +88,6 @@ lsp.setup()
 
 local cmp = require('cmp')
 local lspkind = require('lspkind')
-local tailwind_cmp = require("tailwindcss-colorizer-cmp")
-
-tailwind_cmp.setup()
 
 require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -103,16 +100,10 @@ cmp.setup({
     { name = 'nvim_lua' }
   },
   formatting = {
-    format = function(entry, item)
-      local lspkind_formatter = lspkind.cmp_format({
-        with_text = false,
-        maxwidth = 50,
-      })
-
-      lspkind_formatter(entry, item)
-
-      return tailwind_cmp.formatter(entry, item)
-    end
+    format = lspkind.cmp_format({
+      with_text = false,
+      maxwidth = 50,
+    })
   },
   mapping = lsp.defaults.cmp_mappings({
     -- Scroll up and down in the completion documentation
