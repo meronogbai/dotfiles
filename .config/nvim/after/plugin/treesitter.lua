@@ -10,9 +10,6 @@ require('nvim-treesitter.configs').setup {
     -- @see https://github.com/windwp/nvim-ts-autotag/issues/125
     enable_close_on_slash = false,
   },
-  context_commentstring = {
-    enable = true
-  }
 }
 
 require('treesitter-context').setup()
