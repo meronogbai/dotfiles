@@ -52,6 +52,9 @@ return require('packer').startup(function(use)
   -- Easily setup lsp and cmp
   use 'VonHeikemen/lsp-zero.nvim'
 
+  -- Better TypeScript
+  use 'pmizio/typescript-tools.nvim'
+
   -- Treesitter
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use 'nvim-treesitter/nvim-treesitter-context'

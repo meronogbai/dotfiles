@@ -4,6 +4,8 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({ "tsserver", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "yamlls", "jsonls" })
 
+lsp.skip_server_setup({ 'tsserver' })
+
 lsp.configure('lua_ls', {
   settings = {
     Lua = {
@@ -86,6 +88,8 @@ lsp.on_attach(on_attach)
 
 lsp.setup()
 
+require("typescript-tools").setup { on_attach = on_attach }
+
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 
@@ -118,7 +122,7 @@ local mason_null_ls = require("mason-null-ls")
 mason_null_ls.setup({
   automatic_installation = true,
   automatic_setup = true,
-  ensure_installed = { 'prettierd', 'cspell', 'eslint-lsp' },
+  ensure_installed = { 'cspell', 'prettierd', 'eslintd' },
   handlers = {
     cspell = function()
       null_ls.register(null_ls.builtins.diagnostics.cspell.with {
@@ -148,4 +152,4 @@ vim.diagnostic.config({
 })
 
 -- Enable format on save
-vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+-- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
