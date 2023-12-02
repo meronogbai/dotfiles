@@ -1,0 +1,7 @@
+snippet cl "console.log"
+	console.log(${0});
+
+snippet ctime "console.time ... console.timeEnd"
+	console.time("${1:label}");
+	${0:${VISUAL}}
+	console.timeEnd("$1");
