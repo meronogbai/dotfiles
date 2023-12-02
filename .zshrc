@@ -12,6 +12,8 @@ export LANG='en_US.UTF-8'
 export PATH="${HOME}/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+# required for undercurl support
+export TERM="xterm-kitty"
 
 # Save history to log files
 # See https://www.justinjoyce.dev/save-your-shell-history-to-log-files/
