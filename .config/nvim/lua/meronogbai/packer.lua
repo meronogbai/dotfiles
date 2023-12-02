@@ -90,6 +90,7 @@ return require('packer').startup(function(use)
 
   -- File explorer
   use 'nvim-tree/nvim-tree.lua'
+  use "stevearc/oil.nvim"
 
   -- Bufferline
   use 'akinsho/bufferline.nvim'
