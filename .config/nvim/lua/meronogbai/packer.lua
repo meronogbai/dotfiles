@@ -92,6 +92,9 @@ return require('packer').startup(function(use)
   use 'nvim-tree/nvim-tree.lua'
   use "stevearc/oil.nvim"
 
+  -- Replace netrw's gx
+  use 'chrishrb/gx.nvim'
+
   -- Bufferline
   use 'akinsho/bufferline.nvim'
 

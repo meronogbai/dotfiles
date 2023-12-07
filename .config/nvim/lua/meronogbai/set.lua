@@ -16,3 +16,7 @@ vim.g.mapleader = " "
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
 vim.opt.hlsearch = false
+
+-- disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
