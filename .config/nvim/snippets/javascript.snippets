@@ -5,3 +5,6 @@ snippet ctime "console.time ... console.timeEnd"
 	console.time("${1:label}");
 	${0:${VISUAL}}
 	console.timeEnd("$1");
+
+snippet sl "sleep"
+	await new Promise(res => setTimeout(res, ${0}))
