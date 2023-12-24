@@ -51,7 +51,7 @@ return require('packer').startup(function(use)
   use 'rafamadriz/friendly-snippets'
 
   -- Easily setup lsp and cmp
-  use 'VonHeikemen/lsp-zero.nvim'
+  use({ 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' })
 
   -- Better TypeScript
   use 'pmizio/typescript-tools.nvim'
