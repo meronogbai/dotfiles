@@ -24,7 +24,6 @@ return require('packer').startup(function(use)
   use 'mfussenegger/nvim-dap'
   use 'rcarriga/nvim-dap-ui'
   use 'theHamsta/nvim-dap-virtual-text'
-  use 'nvim-telescope/telescope-dap.nvim'
 
   -- JS/TS Debugging
   use 'mxsdev/nvim-dap-vscode-js'
@@ -70,6 +69,8 @@ return require('packer').startup(function(use)
   -- Telescope
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-telescope/telescope-project.nvim'
+  use 'nvim-telescope/telescope-ui-select.nvim'
+  use 'nvim-telescope/telescope-dap.nvim'
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
   -- Git integration
