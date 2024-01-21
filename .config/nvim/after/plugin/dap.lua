@@ -5,7 +5,7 @@ require("dap-vscode-js").setup({
   adapters = { 'pwa-node' },
 })
 
-for _, language in ipairs({ "typescript", "javascript" }) do
+for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
   dap.configurations[language] = {
     {
       type = "pwa-node",
