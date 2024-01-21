@@ -95,7 +95,10 @@ return require('packer').startup(function(use)
   use "stevearc/oil.nvim"
 
   -- Replace netrw's gx
-  use 'chrishrb/gx.nvim'
+  use { 'chrishrb/gx.nvim',
+    -- new version is buggy :(
+    commit = '38d776a0b35b9daee5020bf3336564571dc785af'
+  }
 
   -- Bufferline
   use 'akinsho/bufferline.nvim'
