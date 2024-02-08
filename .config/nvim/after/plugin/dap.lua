@@ -1,8 +1,10 @@
 local dap = require('dap')
+local dap_vscode_utils = require("dap-vscode-js.utils")
 
 -- JS/TS Debugging
 require("dap-vscode-js").setup({
   adapters = { 'pwa-node' },
+  debugger_path = dap_vscode_utils.join_paths(dap_vscode_utils.get_runtime_dir(), "/lazy/vscode-js-debug"), -- Path to vscode-js-debug installation.
 })
 
 for _, language in ipairs({ "typescript", "javascript", "typescriptreact" }) do
