@@ -64,8 +64,8 @@ alias lg='lazygit'
 alias gt='git trim --no-confirm && git trim -d stray --no-confirm'
 alias t='tmux'
 alias tl='tmux list-sessions'
-alias ts='tmux new-session -s'
-alias ta='tmux attach -t'
+alias ts='tmux new-session'
+alias ta='tmux attach'
 alias tp='tmuxp load'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
