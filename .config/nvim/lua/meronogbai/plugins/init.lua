@@ -14,7 +14,7 @@ return {
 
   -- DAP
   'mfussenegger/nvim-dap',
-  'rcarriga/nvim-dap-ui',
+  { 'rcarriga/nvim-dap-ui',      dependencies = { 'nvim-neotest/nvim-nio' } },
   'theHamsta/nvim-dap-virtual-text',
 
   -- JS/TS Debugging
@@ -44,7 +44,7 @@ return {
   'rafamadriz/friendly-snippets',
 
   -- Easily setup lsp and cmp
-  { 'VonHeikemen/lsp-zero.nvim',       branch = 'v3.x' },
+  { 'VonHeikemen/lsp-zero.nvim', branch = 'v3.x' },
 
   -- Better TypeScript
   'pmizio/typescript-tools.nvim',
