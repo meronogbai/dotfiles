@@ -11,6 +11,7 @@ return {
   'williamboman/mason-lspconfig.nvim',
   'nvimtools/none-ls.nvim',
   'jayp0521/mason-null-ls.nvim',
+  'davidmh/cspell.nvim',
 
   -- DAP
   'mfussenegger/nvim-dap',

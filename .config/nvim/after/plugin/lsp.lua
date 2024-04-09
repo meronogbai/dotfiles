@@ -157,26 +157,32 @@ cmp.setup({
   },
 })
 
-local null_ls = require('null-ls')
-
 require("mason-null-ls").setup({
   automatic_installation = true,
   automatic_setup = true,
   ensure_installed = { 'cspell', 'prettierd', 'ruff-lsp' },
-  handlers = {
-    cspell = function()
-      null_ls.register(null_ls.builtins.diagnostics.cspell.with {
-        extra_args = { "--config", "~/.cspell.json" },
-        diagnostics_postprocess = function(diagnostic)
-          diagnostic.severity = vim.diagnostic.severity["INFO"]
-        end,
-      })
-      null_ls.register(null_ls.builtins.code_actions.cspell)
-    end,
-  }
 })
 
-null_ls.setup()
+local null_ls = require('null-ls')
+local cspell = require('cspell')
+
+local cspell_config = {
+  diagnostics_postprocess = function(diagnostic)
+    diagnostic.severity = vim.diagnostic.severity["INFO"]
+  end,
+  config = {
+    find_json = function(_)
+      return vim.fn.expand("~/.cspell.json")
+    end,
+  },
+}
+
+null_ls.setup({
+  sources = {
+    cspell.diagnostics.with(cspell_config),
+    cspell.code_actions.with(cspell_config),
+  }
+})
 
 -- Enable format on save
 -- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
