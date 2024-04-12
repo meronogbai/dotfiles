@@ -10,6 +10,7 @@ return {
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   'nvimtools/none-ls.nvim',
+  'nvimtools/none-ls-extras.nvim',
   'jayp0521/mason-null-ls.nvim',
   'davidmh/cspell.nvim',
 

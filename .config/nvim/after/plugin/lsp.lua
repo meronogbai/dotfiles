@@ -32,7 +32,7 @@ local lspconfig = require('lspconfig')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { "tsserver", "eslint", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright" },
+  ensure_installed = { "tsserver", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright" },
   handlers = {
     lsp_zero.default_setup,
     tsserver = lsp_zero.noop,
@@ -160,7 +160,7 @@ cmp.setup({
 require("mason-null-ls").setup({
   automatic_installation = true,
   automatic_setup = true,
-  ensure_installed = { 'cspell', 'prettierd', 'ruff-lsp' },
+  ensure_installed = { 'cspell', 'prettierd', 'eslint_d', 'ruff-lsp' },
 })
 
 local null_ls = require('null-ls')
@@ -181,6 +181,9 @@ null_ls.setup({
   sources = {
     cspell.diagnostics.with(cspell_config),
     cspell.code_actions.with(cspell_config),
+    require("none-ls.diagnostics.eslint_d"),
+    require("none-ls.formatting.eslint_d"),
+    require("none-ls.code_actions.eslint_d"),
   }
 })
 
