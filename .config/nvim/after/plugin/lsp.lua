@@ -177,13 +177,19 @@ local cspell_config = {
   },
 }
 
+local eslint_config = {
+  condition = function(utils)
+    return utils.root_has_file({ ".eslintrc.js", "eslint.config.mjs", ".eslintrc.cjs" })
+  end,
+}
+
 null_ls.setup({
   sources = {
     cspell.diagnostics.with(cspell_config),
     cspell.code_actions.with(cspell_config),
-    require("none-ls.diagnostics.eslint_d"),
-    require("none-ls.formatting.eslint_d"),
-    require("none-ls.code_actions.eslint_d"),
+    require("none-ls.diagnostics.eslint_d").with(eslint_config),
+    require("none-ls.formatting.eslint_d").with(eslint_config),
+    require("none-ls.code_actions.eslint_d").with(eslint_config),
   }
 })
 
