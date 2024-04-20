@@ -99,6 +99,14 @@ require('mason-lspconfig').setup({
           }
         }
       })
+    end,
+    clangd = function()
+      lspconfig.clangd.setup({
+        capabilities = {
+          -- see https://www.reddit.com/r/neovim/comments/17m7hu2/nvchad_multiple_different_client_offset_encodings/
+          offsetEncoding = { "utf-16" },
+        },
+      })
     end
   }
 })
