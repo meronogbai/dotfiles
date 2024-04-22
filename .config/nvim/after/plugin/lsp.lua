@@ -32,7 +32,7 @@ local lspconfig = require('lspconfig')
 
 require('mason').setup({})
 require('mason-lspconfig').setup({
-  ensure_installed = { "tsserver", "tailwindcss", "cssls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd" },
+  ensure_installed = { "tsserver", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd" },
   handlers = {
     lsp_zero.default_setup,
     tsserver = lsp_zero.noop,
