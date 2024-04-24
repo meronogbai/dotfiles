@@ -1,6 +1,7 @@
 [user]
 	name = Meron Ogbai
 	email = 22526062+meronogbai@users.noreply.github.com
+	signingkey = 66AB57402120624E
 [init]
 	defaultBranch = main
 [pull]
@@ -12,3 +13,5 @@
 	diffFilter = diff-so-fancy --patch
 [trim]
 	bases = main,staging
+[commit]
+	gpgsign = true
