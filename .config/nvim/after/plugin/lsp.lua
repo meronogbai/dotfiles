@@ -193,6 +193,7 @@ local eslint_config = {
 
 null_ls.setup({
   sources = {
+    null_ls.builtins.formatting.prettierd,
     cspell.diagnostics.with(cspell_config),
     cspell.code_actions.with(cspell_config),
     require("none-ls.diagnostics.eslint_d").with(eslint_config),
