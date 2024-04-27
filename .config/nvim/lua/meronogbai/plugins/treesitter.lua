@@ -1,6 +1,6 @@
 return {
   {
-   'nvim-treesitter/nvim-treesitter',
+    'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup {
@@ -8,7 +8,7 @@ return {
         auto_install = true,
         highlight = {
           enable = true,
-          additional_vim_regex_higlighting = { 'markdown' }
+          additional_vim_regex_highlighting = { 'markdown' }
         },
         autotag = {
           enable = true,
@@ -19,5 +19,5 @@ return {
     end,
     dependencies = { 'windwp/nvim-ts-autotag' }
   },
-  { 'nvim-treesitter/nvim-treesitter-context', config = true }
+  { 'nvim-treesitter/nvim-treesitter-context' },
 }
