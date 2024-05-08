@@ -1,6 +1,7 @@
 return {
   {
     'nvim-telescope/telescope.nvim',
+    lazy = false,
     config = function()
       local telescope = require('telescope')
       local builtin = require('telescope.builtin')
@@ -47,8 +48,6 @@ return {
       telescope.load_extension('dap')
       telescope.load_extension("ui-select")
     end,
-    keys = { { '<leader>ff' }, { '<leader>fg' }, { '<leader>fb' }, { '<leader>fr' }, { '<leader>ft' }, { '<leader>ft' }, { '<leader>fs' }, { '<leader>fk' }, { '<leader>fh' }, { '<leader>fp' } },
-    cmd = 'Telescope',
     dependencies = {
       'nvim-lua/plenary.nvim',
       'nvim-telescope/telescope-project.nvim',
