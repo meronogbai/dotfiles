@@ -92,9 +92,15 @@ require('mason-lspconfig').setup({
     cssls = function()
       lspconfig.cssls.setup({
         settings = {
+          -- for tailwind's @apply rules
           scss = {
             lint = {
-              unknownAtRules = 'ignore' -- for tailwind's @apply rules
+              unknownAtRules = 'ignore'
+            },
+          },
+          css = {
+            lint = {
+              unknownAtRules = 'ignore'
             },
           }
         }
