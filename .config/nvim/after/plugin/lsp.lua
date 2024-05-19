@@ -171,10 +171,18 @@ cmp.setup({
   },
 })
 
+-- Setup vim-dadbod
+cmp.setup.filetype({ "sql" }, {
+  sources = {
+    { name = 'vim-dadbod-completion' },
+    { name = 'buffer' }
+  }
+})
+
 require("mason-null-ls").setup({
   automatic_installation = true,
   automatic_setup = true,
-  ensure_installed = { 'cspell', 'prettierd', 'eslint_d', 'ruff-lsp' },
+  ensure_installed = { 'cspell', 'prettierd', 'eslint_d', 'ruff-lsp', 'terraform-ls' },
 })
 
 local null_ls = require('null-ls')
