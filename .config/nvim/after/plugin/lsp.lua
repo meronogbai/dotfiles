@@ -131,8 +131,8 @@ vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 
 cmp.setup({
   sources = {
-    { name = 'path' },
     { name = 'nvim_lsp' },
+    { name = 'path' },
     { name = 'buffer' },
     { name = 'luasnip' },
     { name = 'nvim_lua' }
