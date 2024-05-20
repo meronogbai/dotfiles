@@ -1,9 +1,8 @@
 return {
-  'NvChad/nvim-colorizer.lua',
+  'brenoprata10/nvim-highlight-colors',
 
   opts = {
-    user_default_options = {
-      tailwind = true,
-    },
+    render = 'background',
+    enable_tailwind = true,
   }
 }
