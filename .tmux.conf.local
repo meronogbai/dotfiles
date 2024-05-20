@@ -349,6 +349,10 @@ tmux_conf_theme_clock_style="24"
 # on Linux, this requires xsel, xclip or wl-copy
 tmux_conf_copy_to_os_clipboard=false
 
+# -- urlscan -------------------------------------------------------------------
+
+# options passed to urlscan
+tmux_conf_urlscan_options='--compact --dedupe --single'
 
 # -- user customizations -------------------------------------------------------
 # this is the place to override or undo settings
