@@ -15,3 +15,5 @@
 	bases = main,staging
 [commit]
 	gpgsign = true
+[rerere]
+	enabled = true
