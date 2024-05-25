@@ -20,12 +20,18 @@ export TERM="xterm-kitty"
 preexec() {if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:%M:%S") $(pwd) $ $3" >> ~/.logs/zsh-history-$(date "+%Y-%m-%d").log; fi}
 
 # Version managers
+
+# fnm
 eval "$(fnm env --use-on-cd --version-file-strategy=recursive)"
 
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+
+# rbenv
+eval "$(rbenv init - zsh)"
 
 # Enable zsh completions
 # See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
@@ -59,7 +65,7 @@ alias up='brew update && brew upgrade'
 alias gdcp='git --no-pager diff | pbcopy'
 alias vim='nvim'
 alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
-alias dco='docker compose'
+alias dco='docker-compose'
 alias lg='lazygit'
 alias gt='git trim --no-confirm && git trim -d stray --no-confirm'
 alias t='tmux'
