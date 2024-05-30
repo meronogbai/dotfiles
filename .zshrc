@@ -52,6 +52,7 @@ antigen bundles <<EOBUNDLES
   colored-man-pages
   yarn
   fzf
+  aws
 EOBUNDLES
 
 antigen theme romkatv/powerlevel10k
