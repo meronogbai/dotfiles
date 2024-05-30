@@ -1,8 +1,7 @@
 return {
   "folke/trouble.nvim",
   keys = {
-    { '<leader>x', '<cmd>TroubleToggle document_diagnostics<cr>',  desc = 'Open trouble' },
-    { '<leader>X', '<cmd>TroubleToggle workspace_diagnostics<cr>', desc = 'Close trouble' }
+    { '<leader>x', '<cmd>Trouble diagnostics toggle focus=true filter.buf=0<cr>', desc = 'Toggle trouble' },
   },
-  dependencies = { "nvim-tree/nvim-web-devicons" },
+  config = true,
 }

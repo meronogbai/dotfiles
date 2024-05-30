@@ -5,7 +5,6 @@ return {
     config = function()
       local telescope = require('telescope')
       local builtin = require('telescope.builtin')
-      local trouble = require("trouble.providers.telescope")
 
       vim.keymap.set('n', '<leader>ff', builtin.find_files)
       vim.keymap.set('n', '<leader>fg', builtin.live_grep)
@@ -31,10 +30,6 @@ return {
         defaults = {
           file_ignore_patterns = { "^node_modules/", "^.git/" },
           prompt_prefix = " ",
-          mappings = {
-            i = { ["<c-t>"] = trouble.open_with_trouble },
-            n = { ["<c-t>"] = trouble.open_with_trouble },
-          },
         },
         extensions = {
           project = {
