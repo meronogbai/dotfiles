@@ -36,8 +36,6 @@ return {
       dashboard.button("SPC f f", "  Find file"),
       dashboard.button("SPC f g", "󰍉  Live grep"),
       dashboard.button("SPC f r", "  Recent files"),
-      dashboard.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
-      dashboard.button("u", "  Update plugins", "<cmd>Lazy update<CR>"),
       dashboard.button("q", "󰗼  Quit", ":qa<CR>"),
     }
 
