@@ -12,9 +12,9 @@ return {
   },
 
   keys = {
-    { '<leader>duo', '<cmd>tab DBUI<cr>',                   desc = 'Launch dadbod ui' },
+    { '<leader>duo', '<cmd>tabnew<cr><cmd>DBUI<cr>',                   desc = 'Launch dadbod ui' },
     { '<leader>duc', '<cmd>DBUIClose<cr><cmd>windo bd<cr>', desc = 'Close dadbod ui' },
-    { '<leader>dut', '<cmd>DBUIToggle<cr>', desc = 'Toggle dadbod ui' }
+    { '<leader>dut', '<cmd>DBUIToggle<cr>',                 desc = 'Toggle dadbod ui' }
   },
   init = function()
     -- Your DBUI configuration
