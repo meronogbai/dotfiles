@@ -21,3 +21,20 @@ vim.keymap.set('n', '<leader>pr', function()
     print("Error: " .. result)
   end
 end, { desc = 'Search for PR in github' })
+
+vim.keymap.set('n', '<leader>rp', function()
+  local command = 'gh repo view --web'
+
+  -- Execute the command and capture the output
+  local result = vim.fn.system(command)
+
+  -- Check the exit code to determine success or failure
+  if vim.v.shell_error == 0 then
+    -- Log success
+    print("Successfully opened repo!")
+  else
+    -- Log failure and show the error message
+    print("Failed to find repo!")
+    print("Error: " .. result)
+  end
+end, { desc = 'Open repo in github' })
