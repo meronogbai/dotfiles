@@ -53,6 +53,7 @@ antigen bundles <<EOBUNDLES
   yarn
   fzf
   aws
+  direnv
 EOBUNDLES
 
 antigen theme romkatv/powerlevel10k
