@@ -201,7 +201,7 @@ local cspell_config = {
 
 local eslint_config = {
   condition = function(utils)
-    return utils.root_has_file({ ".eslintrc.js", "eslint.config.mjs", ".eslintrc.cjs" })
+    return utils.root_has_file({ ".eslintrc.js", "eslint.config.mjs", ".eslintrc.cjs", ".eslintrc.json" })
   end,
 }
 
