@@ -14,22 +14,6 @@ return {
   'jayp0521/mason-null-ls.nvim',
   'davidmh/cspell.nvim',
 
-  -- DAP
-  'mfussenegger/nvim-dap',
-  { 'rcarriga/nvim-dap-ui',      dependencies = { 'nvim-neotest/nvim-nio' } },
-  'theHamsta/nvim-dap-virtual-text',
-
-  -- JS/TS Debugging
-  'mxsdev/nvim-dap-vscode-js',
-
-  {
-    'microsoft/vscode-js-debug',
-    lazy = true,
-    -- builds a copy of vscode-js-debug
-    build =
-    'npm install --legacy-peer-deps && npx gulp vsDebugServerBundle && rm -rf out && mv dist out && git restore package-lock.json'
-  },
-
   -- Completions
   'hrsh7th/nvim-cmp',
   'hrsh7th/cmp-buffer',
