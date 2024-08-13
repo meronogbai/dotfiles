@@ -217,4 +217,4 @@ null_ls.setup({
 })
 
 -- Enable format on save
--- vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
