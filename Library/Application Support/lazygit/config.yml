@@ -1,0 +1,5 @@
+# determines whether hitting 'esc' will quit the application when there is nothing to cancel/close
+quitOnTopLevelReturn: true
+
+git:
+  overrideGpg: true
