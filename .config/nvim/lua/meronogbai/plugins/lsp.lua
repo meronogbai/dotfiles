@@ -69,10 +69,10 @@ return {
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = { "tsserver", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls" },
+        ensure_installed = { "ts_ls", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls" },
         handlers = {
           lsp_zero.default_setup,
-          tsserver = lsp_zero.noop,
+          ts_ls = lsp_zero.noop,
           lua_ls = function()
             local lua_opts = lsp_zero.nvim_lua_ls()
             lspconfig.lua_ls.setup(lua_opts)
