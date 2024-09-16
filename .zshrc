@@ -9,7 +9,7 @@ fi
 export EDITOR='nvim'
 export LC_ALL='en_US.UTF-8'
 export LANG='en_US.UTF-8'
-export PATH="${HOME}/bin:${PATH}"
+export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # required for undercurl support
