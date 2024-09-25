@@ -153,7 +153,21 @@ return {
         }
       })
 
-      require("typescript-tools").setup { on_attach = on_attach }
+      require("typescript-tools").setup {
+        on_attach = on_attach,
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue",
+        },
+        settings = {
+          tsserver_plugins = {
+            "@vue/typescript-plugin",
+          },
+        },
+      }
 
       local cmp_action = lsp_zero.cmp_action()
 
