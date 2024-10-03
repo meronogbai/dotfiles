@@ -1,3 +1,13 @@
+snippet script "script"
+  async function main() {
+    ${0}
+  }
+
+  main().catch((e) => {
+    console.error(e);
+    process.exitCode = 1;
+  });
+
 snippet ctime "console.time ... console.timeEnd"
 	console.time("${1:label}");
 	${0:${VISUAL}}
