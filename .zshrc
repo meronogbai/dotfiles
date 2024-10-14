@@ -75,6 +75,8 @@ alias tl='tmux list-sessions'
 alias ts='tmux new-session'
 alias ta='tmux attach'
 alias tp='tmuxp load'
+# manually set TERM because xterm-kitty doesn't work well with ssh
+alias s='TERM=tmux-256color ssh'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
