@@ -26,6 +26,9 @@ return {
               return { "--hidden" }
             end
           },
+          oldfiles = {
+            cwd_only = true,
+          }
         },
         defaults = {
           file_ignore_patterns = { "^node_modules/", "^.git/" },
