@@ -12,7 +12,7 @@
 [interactive]
 	diffFilter = diff-so-fancy --patch
 [trim]
-	bases = main,staging
+	bases = main,master,staging,development
 [commit]
 	gpgsign = true
 [rerere]
