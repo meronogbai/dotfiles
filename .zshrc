@@ -33,34 +33,56 @@ eval "$(pyenv virtualenv-init -)"
 # rbenv
 eval "$(rbenv init - zsh)"
 
-# Enable zsh completions
-# See https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-FPATH="$(brew --prefix)/share/zsh/site-functions:${HOME}/.zfunc:${FPATH}"
+# zinit - zsh plugin manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-# Antigen
-source $(brew --prefix)/share/antigen/antigen.zsh
+# Plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-syntax-highlighting
 
-antigen use oh-my-zsh
+zinit snippet OMZL::directories.zsh  # directory aliases
+zinit snippet OMZL::completion.zsh  # tab to highlight
+zinit snippet OMZL::history.zsh  # shared history across sessions
+zinit snippet OMZL::key-bindings.zsh  # terminal shortcuts like C-a and C-e
 
-antigen bundles <<EOBUNDLES
-  zsh-users/zsh-syntax-highlighting
-  zsh-users/zsh-autosuggestions
-  zsh-users/zsh-completions
-  git
-  history-substring-search
-  z
-  colored-man-pages
-  yarn
-  fzf
-  aws
-  direnv
-EOBUNDLES
+zinit snippet OMZP::aws
+zinit snippet OMZP::colored-man-pages
+zinit snippet OMZP::fzf
+zinit snippet OMZP::git
+zinit snippet OMZP::yarn
+zinit snippet OMZP::z
 
-antigen theme romkatv/powerlevel10k
+# Load direnv
+zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
+    atpull'%atclone' src"zhook.zsh"
+zinit light direnv/direnv
 
-antigen apply
+# Load powerlevel10k theme
+zinit ice depth=1
+zinit light romkatv/powerlevel10k
 
-# Aliases
+# Load Zsh completions
+autoload -Uz compinit && compinit
+
+# Load Bash-style completions
+autoload -U +X bashcompinit && bashcompinit
+
+# Load pnpm completions
+# Always put this after compinit call
+zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
+zinit light g-plane/pnpm-shell-completion
+
+# Load terraform completions
+complete -o nospace -C /opt/homebrew/bin/terraform terraform
+
+# Load all the completions
+zinit cdreplay -q
+
+# Custom Aliases
 alias ls='lsd'
 alias tree='lsd --tree'
 alias up='brew update && brew upgrade'
@@ -77,6 +99,7 @@ alias ta='tmux attach'
 alias tp='tmuxp load'
 # manually set TERM because xterm-kitty doesn't work well with ssh
 alias s='TERM=tmux-256color ssh'
+alias tf='terraform'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
