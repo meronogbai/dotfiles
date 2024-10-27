@@ -242,12 +242,12 @@ return {
 
       null_ls.setup({
         sources = {
-          null_ls.builtins.formatting.prettierd,
           cspell.diagnostics.with(cspell_config),
           cspell.code_actions.with(cspell_config),
           require("none-ls.diagnostics.eslint_d").with(eslint_config),
           require("none-ls.formatting.eslint_d").with(eslint_config),
           require("none-ls.code_actions.eslint_d").with(eslint_config),
+          null_ls.builtins.formatting.prettierd, -- prettier should always be after eslint!!!!!!!!!!!!!!
         }
       })
 
