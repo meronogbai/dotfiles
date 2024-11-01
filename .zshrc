@@ -48,7 +48,8 @@ zinit snippet OMZL::directories.zsh  # directory aliases
 zinit snippet OMZL::completion.zsh  # tab to highlight
 zinit snippet OMZL::history.zsh  # shared history across sessions
 zinit snippet OMZL::key-bindings.zsh  # terminal shortcuts like C-a and C-e
-zinit snippet OMZL::functions.zsh  # adds take funciton
+zinit snippet OMZL::functions.zsh  # adds take function
+zinit snippet OMZL::git.zsh  # all the git goodies
 
 zinit snippet OMZP::aws
 zinit snippet OMZP::colored-man-pages
