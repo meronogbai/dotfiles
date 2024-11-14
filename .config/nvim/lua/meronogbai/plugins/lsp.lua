@@ -1,10 +1,8 @@
 return {
   {
-    'VonHeikemen/lsp-zero.nvim',
-    branch = 'v3.x',
+    'neovim/nvim-lspconfig',
     dependencies = {
-      -- LSP
-      'neovim/nvim-lspconfig',
+      -- LSP Support
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
       'nvimtools/none-ls.nvim',
@@ -31,51 +29,109 @@ return {
       'pmizio/typescript-tools.nvim',
     },
     config = function()
-      local lsp_zero = require('lsp-zero')
       local lspconfig = require('lspconfig')
       local cmp = require('cmp')
       local lspkind = require('lspkind')
       local null_ls = require('null-ls')
       local cspell = require('cspell')
+      local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      lsp_zero.set_sign_icons({
-        error = "", warn = "", hint = "󰌶", info = ""
-      })
+      -- Set up sign icons
+      local signs = {
+        Error = "",
+        Warn = "",
+        Hint = "󰌶",
+        Info = ""
+
+      }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+
+      -- Configure diagnostic and hover window appearance
+      local float_config = {
+        focusable = true,
+        style = 'minimal',
+        border = 'rounded',
+        source = true,
+        header = '',
+        prefix = '',
+      }
 
       vim.diagnostic.config({
         virtual_text = true,
         update_in_insert = true,
-        float = {
-          focusable = true,
-          style = 'minimal',
-          border = 'rounded',
-          source = true,
-          header = '',
-          prefix = '',
-        }
+        float = float_config,
       })
 
+      -- Configure hover and signature help styling
+      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = 'rounded' }
+      )
+
+      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = 'rounded' }
+      )
+
       local on_attach = function(_client, bufnr)
-        vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end,
-          { silent = true, buffer = bufnr, desc = 'Format' })
-        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { silent = true, buffer = bufnr, desc = 'Rename' })
-        vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action,
-          { silent = true, buffer = bufnr, desc = 'Code action' })
+        local opts = { silent = true, buffer = bufnr }
+        vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, opts)
+        vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
+        vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
+        vim.keymap.set({ 'n', 'v' }, '<F4>', vim.lsp.buf.code_action, opts)
 
-        lsp_zero.default_keymaps({ buffer = bufnr })
+        local function diagnostic_goto(go)
+          return function()
+            go({ severity = { min = vim.diagnostic.severity.WARN } })
+          end
+        end
+        vim.keymap.set("n", "]d", diagnostic_goto(vim.diagnostic.goto_next), opts)
+        vim.keymap.set("n", "[d", diagnostic_goto(vim.diagnostic.goto_prev), opts)
+
+        vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+        vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+        vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
+        vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
+        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
       end
-
-      lsp_zero.on_attach(on_attach)
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
         ensure_installed = { "ts_ls", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls", "bashls", "dockerls", "html" },
         handlers = {
-          lsp_zero.default_setup,
-          ts_ls = lsp_zero.noop,
-          lua_ls = function()
-            local lua_opts = lsp_zero.nvim_lua_ls()
-            lspconfig.lua_ls.setup(lua_opts)
+          function(server_name)
+            lspconfig[server_name].setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+            })
+          end,
+          ["ts_ls"] = function() end, -- Skip ts_ls as we use typescript-tools
+          ["lua_ls"] = function()
+            lspconfig.lua_ls.setup({
+              on_attach = on_attach,
+              capabilities = capabilities,
+              settings = {
+                Lua = {
+                  runtime = {
+                    version = 'LuaJIT'
+                  },
+                  diagnostics = {
+                    globals = { 'vim' },
+                  },
+                  workspace = {
+                    library = {
+                      vim.env.VIMRUNTIME,
+                    }
+                  }
+                }
+              },
+            })
           end,
           -- Schemas https://www.schemastore.org
           jsonls = function()
@@ -169,8 +225,7 @@ return {
         },
       }
 
-      local cmp_action = lsp_zero.cmp_action()
-
+      local luasnip = require('luasnip')
       require('luasnip.loaders.from_vscode').lazy_load()
       require("luasnip.loaders.from_snipmate").lazy_load()
 
@@ -186,13 +241,36 @@ return {
         },
         mapping = cmp.mapping.preset.insert({
           ['<CR>'] = cmp.mapping.confirm({ select = false }),
-          ['<C-e>'] = cmp_action.toggle_completion(),
-          ['<Tab>'] = cmp_action.tab_complete(),
+          ['<Tab>'] = cmp.mapping.select_next_item(),
           ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-          ['<C-f>'] = cmp_action.luasnip_jump_forward(),
-          ['<C-b>'] = cmp_action.luasnip_jump_backward(),
           ['<C-u>'] = cmp.mapping.scroll_docs(-5),
           ['<C-d>'] = cmp.mapping.scroll_docs(5),
+
+          -- Toggle completion
+          ['<C-e>'] = function()
+            if cmp.visible() then
+              cmp.abort()
+            else
+              cmp.complete()
+            end
+          end,
+
+          -- Jump to the next snippet placeholder
+          ['<C-f>'] = cmp.mapping(function(fallback)
+            if luasnip.locally_jumpable(1) then
+              luasnip.jump(1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
+          -- Jump to the previous snippet placeholder
+          ['<C-b>'] = cmp.mapping(function(fallback)
+            if luasnip.locally_jumpable(-1) then
+              luasnip.jump(-1)
+            else
+              fallback()
+            end
+          end, { 'i', 's' }),
         }),
         formatting = {
           format = lspkind.cmp_format({
