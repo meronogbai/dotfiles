@@ -71,11 +71,6 @@ autoload -Uz compinit && compinit
 # Load Bash-style completions
 autoload -U +X bashcompinit && bashcompinit
 
-# Load pnpm completions
-# Always put this after compinit call
-zinit ice atload"zpcdreplay" atclone"./zplug.zsh" atpull"%atclone"
-zinit light g-plane/pnpm-shell-completion
-
 # Load terraform completions
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
 
