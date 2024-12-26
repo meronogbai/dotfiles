@@ -321,6 +321,8 @@ return {
 
       null_ls.setup({
         sources = {
+          require('none-ls.formatting.ruff').with({ extra_args = { '--extend-select', 'I' } }),
+          require('none-ls.formatting.ruff_format'),
           cspell.diagnostics.with(cspell_config),
           cspell.code_actions.with(cspell_config),
           require("none-ls.diagnostics.eslint_d").with(eslint_config),
