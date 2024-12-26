@@ -12,8 +12,6 @@ export LANG='en_US.UTF-8'
 export PATH="${HOME}/bin:${HOME}/go/bin:${PATH}"
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# required for undercurl support
-# export TERM="xterm-kitty"
 
 # Save history to log files
 # See https://www.justinjoyce.dev/save-your-shell-history-to-log-files/
@@ -99,8 +97,6 @@ alias tl='tmux list-sessions'
 alias ts='tmux new-session'
 alias ta='tmux attach'
 alias tp='tmuxp load'
-# manually set TERM because xterm-kitty doesn't work well with ssh
-alias s='TERM=tmux-256color ssh'
 alias tf='terraform'
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
