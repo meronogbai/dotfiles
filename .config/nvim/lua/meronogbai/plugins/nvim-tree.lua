@@ -6,7 +6,12 @@ return {
     },
     git = {
       ignore = false
-    }
+    },
+    actions = {
+      open_file = {
+        quit_on_open = true,
+      },
+    },
   },
   cmd = { 'NvimTreeFindFileToggle' },
   keys = { { '<leader>e', '<cmd>NvimTreeFindFileToggle<CR>', desc = 'File Explorer' } }
