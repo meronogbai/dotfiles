@@ -93,6 +93,7 @@ alias ts='tmux new-session'
 alias ta='tmux attach'
 alias tp='tmuxp load'
 alias tf='terraform'
+alias icat="kitten icat"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
