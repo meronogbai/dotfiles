@@ -319,6 +319,8 @@ return {
         end,
       }
 
+      local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+
       null_ls.setup({
         sources = {
           require('none-ls.formatting.ruff').with({ extra_args = { '--extend-select', 'I' } }),
@@ -329,11 +331,21 @@ return {
           require("none-ls.formatting.eslint_d").with(eslint_config),
           require("none-ls.code_actions.eslint_d").with(eslint_config),
           null_ls.builtins.formatting.prettierd, -- prettier should always be after eslint!!!!!!!!!!!!!!
-        }
+        },
+        -- Format on save
+        on_attach = function(client, bufnr)
+          if client.supports_method("textDocument/formatting") then
+            vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+            vim.api.nvim_create_autocmd("BufWritePre", {
+              group = augroup,
+              buffer = bufnr,
+              callback = function()
+                vim.lsp.buf.format({ async = false })
+              end,
+            })
+          end
+        end,
       })
-
-      -- Enable format on save
-      vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format()]]
     end
   }
 }
