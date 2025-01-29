@@ -217,12 +217,6 @@ return {
           "javascriptreact",
           "typescript",
           "typescriptreact",
-          "vue",
-        },
-        settings = {
-          tsserver_plugins = {
-            "@vue/typescript-plugin",
-          },
         },
       }
 
