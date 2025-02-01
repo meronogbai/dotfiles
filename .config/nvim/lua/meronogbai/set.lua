@@ -20,7 +20,3 @@ vim.opt.hlsearch = false
 -- disable netrw
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
--- handle python version via pyenv
--- @see https://github.com/neovim/nvim-lspconfig/issues/717#issuecomment-1938450468
-vim.env.PYENV_VERSION = vim.fn.system('pyenv version'):match('(%S+)%s+%(.-%)')
