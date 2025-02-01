@@ -94,7 +94,7 @@ alias ta='tmux attach'
 alias tp='tmuxp load'
 alias tf='terraform'
 alias icat="kitten icat"
-alias grp='gh repo view --web'
+alias gro='gh repo view --web'
 alias gpf='git push --force-with-lease'
 
 # private aliases in ~/.private-aliases.zsh

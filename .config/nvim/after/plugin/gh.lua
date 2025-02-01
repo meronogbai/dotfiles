@@ -21,7 +21,7 @@ vim.keymap.set('n', '<leader>pr', function()
   end
 end, { desc = 'Open commit in github' })
 
-vim.keymap.set('n', '<leader>rp', function()
+vim.keymap.set('n', '<leader>ro', function()
   local command = 'gh browse'
 
   -- Execute the command and capture the output
