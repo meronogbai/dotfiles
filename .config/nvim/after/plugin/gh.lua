@@ -1,39 +1,73 @@
--- Opens the commit that last updated the current line in github
--- Depends on the `gh` cli
-vim.keymap.set('n', '<leader>pr', function()
+-- Opens the PR/commit that last updated the current line in github
+vim.keymap.set('n', '<leader>ghp', function()
   local lineNum = vim.api.nvim__buf_stats(0).current_lnum
   local fileName = vim.fn.expand('%')
   local commitHashCommand = 'git blame -L' .. lineNum .. ',' .. lineNum .. ' ' .. fileName .. " | awk '{print $1}'"
 
-  local command = 'gh browse `' .. commitHashCommand .. '`'
+  -- Get the commit hash
+  local commitHash = vim.fn.system(commitHashCommand):gsub('\n', '')
 
-  -- Execute the command and capture the output
-  local result = vim.fn.system(command)
-
-  -- Check the exit code to determine success or failure
-  if vim.v.shell_error == 0 then
-    -- Log success
-    print("Successfully opened commit in GitHub!")
-  else
-    -- Log failure and show the error message
-    print("Failed to open commit in GitHub!")
-    print("Error: " .. result)
+  -- Check if the command was successful
+  if vim.v.shell_error ~= 0 or commitHash == "" or commitHash:match("^0+$") then
+    print("❌ No valid commit found for this line!")
+    return
   end
-end, { desc = 'Open commit in github' })
 
-vim.keymap.set('n', '<leader>ro', function()
-  local command = 'gh browse'
+  -- Check if the commit is part of a PR
+  local prCheckCommand = 'gh pr list -s all --search ' .. commitHash .. ' --json number --jq \'map(.number) | @sh\''
+  local prNumbersStr = vim.fn.system(prCheckCommand):gsub('\n', '')
 
-  -- Execute the command and capture the output
-  local result = vim.fn.system(command)
-
-  -- Check the exit code to determine success or failure
-  if vim.v.shell_error == 0 then
-    -- Log success
-    print("Successfully opened repo!")
-  else
-    -- Log failure and show the error message
-    print("Failed to find repo!")
-    print("Error: " .. result)
+  -- Extract PR numbers from shell-quoted output
+  local prNumbers = {}
+  for pr in prNumbersStr:gmatch("%d+") do
+    table.insert(prNumbers, pr)
   end
-end, { desc = 'Open repo in github' })
+
+  if #prNumbers > 0 then
+    -- Open all found PRs
+    for _, prNumber in ipairs(prNumbers) do
+      local prViewCommand = 'gh pr view ' .. prNumber .. ' --web'
+      vim.fn.system(prViewCommand)
+    end
+    print("✅ Successfully opened PR(s) in GitHub: " .. table.concat(prNumbers, ", "))
+  else
+    -- No PR found, open the commit instead
+    local browseCommand = 'gh browse ' .. commitHash
+    local browseResult = vim.fn.system(browseCommand)
+
+    if vim.v.shell_error == 0 then
+      print("✅ Successfully opened commit in GitHub!")
+    else
+      print("❌ Failed to open commit: " .. browseResult)
+    end
+  end
+end, { desc = 'Open PR(s) or commit in GitHub' })
+
+-- Opens the repo in github
+vim.keymap.set('n', '<leader>ghr', function()
+  local command = { 'gh', 'repo', 'view', '--web' }
+
+  vim.system(command, { text = true }, function(obj)
+    if obj.code == 0 then
+      print("✅ Successfully opened repo!")
+    else
+      print("❌ Failed to open repo!")
+    end
+  end)
+end, { desc = 'Open repo in GitHub' })
+
+-- Opens the current file in github
+vim.keymap.set('n', '<leader>ghf', function()
+  local filePath = vim.fn.expand('%')
+
+  -- Use gh browse to open the file in GitHub
+  local command = { 'gh', 'browse', filePath }
+
+  vim.system(command, { text = true }, function(obj)
+    if obj.code == 0 then
+      print("✅ Successfully opened file!")
+    else
+      print("❌ Failed to open file in GitHub: " .. (obj.stderr or ""))
+    end
+  end)
+end, { desc = 'Open current file in GitHub' })
