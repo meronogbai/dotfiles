@@ -104,7 +104,7 @@ return {
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = { "ts_ls", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls", "bashls", "dockerls", "html" },
+        ensure_installed = { "ts_ls", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls", "bashls", "dockerls", "html", 'terraformls' },
         handlers = {
           function(server_name)
             lspconfig[server_name].setup({
@@ -293,7 +293,7 @@ return {
       require("mason-null-ls").setup({
         automatic_installation = true,
         automatic_setup = true,
-        ensure_installed = { 'cspell', 'prettierd', 'eslint_d', 'ruff', 'terraform-ls' },
+        ensure_installed = { 'cspell', 'prettierd', 'eslint_d', 'ruff', 'sqlfluff', 'terraform_fmt' },
       })
 
       local cspell_config = {
@@ -317,10 +317,14 @@ return {
 
       null_ls.setup({
         sources = {
-          require('none-ls.formatting.ruff').with({ extra_args = { '--extend-select', 'I' } }),
-          require('none-ls.formatting.ruff_format'),
           cspell.diagnostics.with(cspell_config),
           cspell.code_actions.with(cspell_config),
+          null_ls.builtins.formatting.sqlfluff.with({
+            extra_args = { "--dialect", "postgres" }, -- dialect is a mandatory flag
+          }),
+          null_ls.builtins.formatting.terraform_fmt,
+          require('none-ls.formatting.ruff').with({ extra_args = { '--extend-select', 'I' } }),
+          require('none-ls.formatting.ruff_format'),
           require("none-ls.diagnostics.eslint_d").with(eslint_config),
           require("none-ls.formatting.eslint_d").with(eslint_config),
           require("none-ls.code_actions.eslint_d").with(eslint_config),
