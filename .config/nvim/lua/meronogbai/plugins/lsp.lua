@@ -65,41 +65,38 @@ return {
         float = float_config,
       })
 
-      -- Configure hover and signature help styling
-      vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = 'rounded' }
-      )
-
-      vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = 'rounded' }
-      )
-
       local on_attach = function(_client, bufnr)
-        local opts = { silent = true, buffer = bufnr }
+        local opts = { silent = true, buffer = bufnr, noremap = true }
         vim.keymap.set('n', 'gf', function() vim.lsp.buf.format { async = false } end, opts)
         vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
         vim.keymap.set({ 'n', 'v' }, '<leader>ca', vim.lsp.buf.code_action, opts)
         vim.keymap.set({ 'n', 'v' }, '<F4>', vim.lsp.buf.code_action, opts)
 
-        local function diagnostic_goto(go)
+        local function diagnostic_goto(count)
           return function()
-            go({ severity = { min = vim.diagnostic.severity.WARN } })
+            vim.diagnostic.jump({
+              count = count,
+              float = true,
+              severity = { min = vim.diagnostic.severity.WARN }
+            })
           end
         end
-        vim.keymap.set("n", "]d", diagnostic_goto(vim.diagnostic.goto_next), opts)
-        vim.keymap.set("n", "[d", diagnostic_goto(vim.diagnostic.goto_prev), opts)
+        vim.keymap.set("n", "]d", diagnostic_goto(1), opts)
+        vim.keymap.set("n", "[d", diagnostic_goto(-1), opts)
 
         vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
         vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-        vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+        vim.keymap.set('n', 'K', function()
+          vim.lsp.buf.hover(float_config)
+        end, opts)
         vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
         vim.keymap.set('n', 'gl', vim.diagnostic.open_float, opts)
         -- Conflicts with tmux
-        -- vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+        -- vim.keymap.set('n', '<C-k>', function()
+        --   vim.lsp.buf.signature_help(float_config)
+        -- end, opts)
         vim.keymap.set('n', '<leader>D', vim.lsp.buf.type_definition, opts)
-        vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+        vim.keymap.set('n', 'grr', vim.lsp.buf.references, opts)
       end
 
       require('mason').setup({})

@@ -2,6 +2,9 @@ return {
   'lewis6991/gitsigns.nvim',
   lazy = false,
   opts = {
+    preview_config = {
+      border = "rounded",
+    },
     on_attach = function(bufnr)
       local gs = package.loaded.gitsigns
 
