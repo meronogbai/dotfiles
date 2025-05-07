@@ -42,10 +42,18 @@ zinit snippet OMZL::git.zsh  # all the git goodies
 
 zinit snippet OMZP::aws
 zinit snippet OMZP::colored-man-pages
+# wait for the sake of zsh vi mode
+zinit ice lucid wait
 zinit snippet OMZP::fzf
 zinit snippet OMZP::git
 zinit snippet OMZP::yarn
 zinit snippet OMZP::z
+
+# Load zsh vi mode
+ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+zinit ice depth=1
+zinit light jeffreytse/zsh-vi-mode
+zvm_bindkey vicmd '^R' redo
 
 # Load direnv
 zinit ice as"program" make'!' atclone'./direnv hook zsh > zhook.zsh' \
