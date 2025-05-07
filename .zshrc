@@ -80,7 +80,6 @@ zinit cdreplay -q
 alias ls='lsd'
 alias tree='lsd --tree'
 alias up='brew update && brew upgrade && brew cleanup -s'
-alias gdcp='git --no-pager diff | pbcopy'
 alias vim='nvim'
 alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 alias dco='docker compose'
@@ -93,7 +92,10 @@ alias ta='tmux attach'
 alias tp='tmuxp load'
 alias tf='terraform'
 alias icat="kitten icat"
-alias gpf='git push --force-with-lease'
+
+gdcp() {
+  git --no-pager diff "$@" | pbcopy
+}
 
 # private aliases in ~/.private-aliases.zsh
 [ -f ~/.private-aliases.zsh ] && source ~/.private-aliases.zsh
