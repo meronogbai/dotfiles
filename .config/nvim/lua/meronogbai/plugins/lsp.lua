@@ -101,7 +101,7 @@ return {
 
       require('mason').setup({})
       require('mason-lspconfig').setup({
-        ensure_installed = { "ts_ls", "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "graphql", "pyright", "clangd", "gopls", "bashls", "dockerls", "html", 'terraformls' },
+        ensure_installed = { "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "pyright", "clangd", "gopls", "bashls", "dockerls", "html", 'terraformls' },
         handlers = {
           function(server_name)
             lspconfig[server_name].setup({
@@ -109,7 +109,6 @@ return {
               capabilities = capabilities,
             })
           end,
-          ["ts_ls"] = function() end, -- Skip ts_ls as we use typescript-tools
           ["lua_ls"] = function()
             lspconfig.lua_ls.setup({
               on_attach = on_attach,
