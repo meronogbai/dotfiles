@@ -36,18 +36,6 @@ return {
       local cspell = require('cspell')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-      -- Set up sign icons
-      local signs = {
-        Error = "",
-        Warn = "",
-        Hint = "󰌶",
-        Info = ""
-
-      }
-      for type, icon in pairs(signs) do
-        local hl = "DiagnosticSign" .. type
-        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-      end
 
       -- Configure diagnostic and hover window appearance
       local float_config = {
@@ -63,6 +51,14 @@ return {
         virtual_text = true,
         update_in_insert = true,
         float = float_config,
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = "",
+            [vim.diagnostic.severity.WARN] = "",
+            [vim.diagnostic.severity.HINT] = "󰌶",
+            [vim.diagnostic.severity.INFO] = "",
+          },
+        },
       })
 
       local on_attach = function(_client, bufnr)
