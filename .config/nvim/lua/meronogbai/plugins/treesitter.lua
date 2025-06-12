@@ -13,7 +13,7 @@ return {
       })
     end,
   },
-  { 'nvim-treesitter/nvim-treesitter-context' },
+  { 'nvim-treesitter/nvim-treesitter-context', opts ={} },
   {
     'windwp/nvim-ts-autotag',
     config = function()
