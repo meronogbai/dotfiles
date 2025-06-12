@@ -55,5 +55,7 @@ Temporary Items
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,macos
 
 
-# Experiment with https://aider.chat/
+# AI assistants
 .aider*
+.claude/
+CLAUDE.md
