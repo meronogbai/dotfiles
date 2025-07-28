@@ -36,7 +36,6 @@ return {
       local cspell = require('cspell')
       local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-
       -- Configure diagnostic and hover window appearance
       local float_config = {
         focusable = true,
@@ -96,113 +95,69 @@ return {
       end
 
       require('mason').setup({})
-      require('mason-lspconfig').setup({
-        ensure_installed = { "tailwindcss", "cssls", "dockerls", "lua_ls", "rust_analyzer", "yamlls", "jsonls", "pyright", "clangd", "gopls", "bashls", "dockerls", "html", 'terraformls' },
-        handlers = {
-          function(server_name)
-            lspconfig[server_name].setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-            })
-          end,
-          ["lua_ls"] = function()
-            lspconfig.lua_ls.setup({
-              on_attach = on_attach,
-              capabilities = capabilities,
-              settings = {
-                Lua = {
-                  runtime = {
-                    version = 'LuaJIT'
-                  },
-                  diagnostics = {
-                    globals = { 'vim' },
-                  },
-                  workspace = {
-                    library = {
-                      vim.env.VIMRUNTIME,
-                    }
-                  }
-                }
-              },
-            })
-          end,
-          -- Schemas https://www.schemastore.org
-          jsonls = function()
-            lspconfig.jsonls.setup({
-              filetypes = { "json", "jsonc" },
-              settings = {
-                json = {
-                  schemas = {
-                    {
-                      fileMatch = { "package.json" },
-                      url = "https://json.schemastore.org/package.json"
-                    },
-                    {
-                      fileMatch = { "tsconfig*.json" },
-                      url = "https://json.schemastore.org/tsconfig.json"
-                    },
-                    {
-                      fileMatch = {
-                        ".prettierrc",
-                        ".prettierrc.json",
-                        "prettier.config.json"
-                      },
-                      url = "https://json.schemastore.org/prettierrc.json"
-                    },
-                    {
-                      fileMatch = { ".eslintrc", ".eslintrc.json" },
-                      url = "https://json.schemastore.org/eslintrc.json"
-                    },
-                  }
-                }
-              }
-            })
-          end,
-          yamlls = function()
-            lspconfig.yamlls.setup({
-              settings = {
-                yaml = {
-                  schemas = {
-                    ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] = {
-                      "docker-compose*.{yml,yaml}"
-                    },
-                    ["http://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
-                    ["http://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
-                    ["http://json.schemastore.org/prettierrc.json"] = ".prettierrc.{yml,yaml}",
-                  }
-                }
-              }
-            })
-          end,
-          cssls = function()
-            lspconfig.cssls.setup({
-              -- for tailwind's @apply rules
-              settings = {
-                scss = {
-                  lint = {
-                    unknownAtRules = 'ignore'
-                  },
-                },
-                css = {
-                  lint = {
-                    unknownAtRules = 'ignore'
-                  },
-                }
-              }
-            })
-          end,
-          clangd = function()
-            lspconfig.clangd.setup({
-              capabilities = {
-                -- see https://www.reddit.com/r/neovim/comments/17m7hu2/nvchad_multiple_different_client_offset_encodings/
-                offsetEncoding = { "utf-16" },
-              },
-            })
-          end
-        }
-      })
 
-      require("typescript-tools").setup {
+      local custom_server_configs = {
+        lua_ls = {
+          settings = {
+            Lua = {
+              runtime = { version = "LuaJIT" },
+              diagnostics = { globals = { "vim" } },
+              workspace = { library = { vim.env.VIMRUNTIME } },
+            },
+          },
+        },
+
+        jsonls = {
+          filetypes = { "json", "jsonc" },
+          settings = {
+            json = {
+              schemas = {
+                { fileMatch = { "package.json" },                                            url = "https://json.schemastore.org/package.json" },
+                { fileMatch = { "tsconfig*.json" },                                          url = "https://json.schemastore.org/tsconfig.json" },
+                { fileMatch = { ".prettierrc", ".prettierrc.json", "prettier.config.json" }, url = "https://json.schemastore.org/prettierrc.json" },
+                { fileMatch = { ".eslintrc", ".eslintrc.json" },                             url = "https://json.schemastore.org/eslintrc.json" },
+              },
+            },
+          },
+        },
+
+        yamlls = {
+          settings = {
+            yaml = {
+              schemas = {
+                ["https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json"] =
+                "docker-compose*.{yml,yaml}",
+                ["http://json.schemastore.org/github-workflow.json"] = ".github/workflows/*.{yml,yaml}",
+                ["http://json.schemastore.org/github-action.json"] = ".github/action.{yml,yaml}",
+                ["http://json.schemastore.org/prettierrc.json"] = ".prettierrc.{yml,yaml}",
+              },
+            },
+          },
+        },
+
+        cssls = {
+          settings = {
+            scss = { lint = { unknownAtRules = "ignore" } },
+            css = { lint = { unknownAtRules = "ignore" } },
+          },
+        },
+
+        clangd = {
+          capabilities = {
+            -- see https://www.reddit.com/r/neovim/comments/17m7hu2/nvchad_multiple_different_client_offset_encodings/
+            offsetEncoding = { "utf-16" },
+          },
+        },
+      }
+
+      for _, server_name in ipairs(require('mason-lspconfig').get_installed_servers()) do
+        lspconfig[server_name].setup(vim.tbl_extend('force', {
+          on_attach = on_attach,
+          capabilities = capabilities,
+        }, custom_server_configs[server_name] or {}))
+      end
+
+      require("typescript-tools").setup({
         on_attach = on_attach,
         filetypes = {
           "javascript",
@@ -210,7 +165,7 @@ return {
           "typescript",
           "typescriptreact",
         },
-      }
+      })
 
       local luasnip = require('luasnip')
       require('luasnip.loaders.from_vscode').lazy_load()
