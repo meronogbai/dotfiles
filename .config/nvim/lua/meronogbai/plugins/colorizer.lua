@@ -1,8 +1,8 @@
 return {
-  'brenoprata10/nvim-highlight-colors',
+	"brenoprata10/nvim-highlight-colors",
 
-  opts = {
-    render = 'background',
-    enable_tailwind = true,
-  }
+	opts = {
+		render = "background",
+		enable_tailwind = true,
+	},
 }
