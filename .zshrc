@@ -51,6 +51,8 @@ zinit snippet OMZP::z
 
 # Load zsh vi mode
 ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+ZVM_SYSTEM_CLIPBOARD_ENABLED=true
+
 zinit ice depth=1
 zinit light jeffreytse/zsh-vi-mode
 zvm_bindkey vicmd '^R' redo
