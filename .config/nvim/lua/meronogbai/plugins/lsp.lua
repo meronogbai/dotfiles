@@ -120,6 +120,7 @@ return {
 					"tailwindcss-language-server",
 					"terraform-ls",
 					"yaml-language-server",
+					"taplo",
 				},
 			})
 
