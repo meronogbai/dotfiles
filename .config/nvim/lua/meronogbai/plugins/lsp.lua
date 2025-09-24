@@ -27,10 +27,10 @@ return {
 			"pmizio/typescript-tools.nvim",
 		},
 		config = function()
-			local lspconfig = require("lspconfig")
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local conform = require("conform")
+			local mason_lspconfig = require("mason-lspconfig")
 			local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 			-- Configure diagnostic and hover window appearance
@@ -95,11 +95,11 @@ return {
 			end
 
 			require("mason").setup({})
+			mason_lspconfig.setup({})
 
 			-- Ensure external tools and LSPs are installed
 			require("mason-tool-installer").setup({
 				ensure_installed = {
-					-- LSP servers (Mason package names)
 					"bash-language-server",
 					"clangd",
 					"css-lsp",
@@ -109,25 +109,18 @@ return {
 					"html-lsp",
 					"json-lsp",
 					"lua-language-server",
+					"phpactor",
+					"prettierd",
 					"prisma-language-server",
 					"pyright",
+					"ruff",
 					"rust-analyzer",
+					"sqlfluff",
+					"stylua",
 					"tailwindcss-language-server",
 					"terraform-ls",
 					"yaml-language-server",
-
-					-- Tools / formatters
-					"stylua",
-					"prettierd",
-					"prettier",
-					"eslint_d",
-					"ruff",
-					"sqlfluff",
-					"terraform",
 				},
-				run_on_start = true,
-				start_delay = 3000,
-				debounce_hours = 24,
 			})
 
 			local custom_server_configs = {
@@ -205,11 +198,14 @@ return {
 				},
 			}
 
-			for _, server_name in ipairs(require("mason-lspconfig").get_installed_servers()) do
-				lspconfig[server_name].setup(vim.tbl_extend("force", {
+			for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
+				local server_config = vim.tbl_deep_extend("force", {
 					on_attach = on_attach,
-					capabilities = capabilities,
-				}, custom_server_configs[server_name] or {}))
+					capabilities = vim.deepcopy(capabilities),
+				}, custom_server_configs[server_name] or {})
+
+				vim.lsp.config(server_name, server_config)
+				vim.lsp.enable(server_name)
 			end
 
 			require("typescript-tools").setup({
