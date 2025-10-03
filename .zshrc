@@ -94,8 +94,6 @@ alias ta='tmux attach'
 alias tp='tmuxp load'
 alias tf='terraform'
 alias icat="kitten icat"
-alias cy='claude --dangerously-skip-permissions'
-alias gy='gemini --yolo'
 
 gdcp() {
   git --no-pager diff "$@" | pbcopy
