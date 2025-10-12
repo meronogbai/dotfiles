@@ -187,16 +187,6 @@ return {
 						offsetEncoding = { "utf-16" },
 					},
 				},
-
-				eslint = {
-					settings = {
-						workingDirectories = { mode = "auto" },
-						codeAction = {
-							disableRuleComment = { enable = true },
-							showDocumentation = { enable = true },
-						},
-					},
-				},
 			}
 
 			for _, server_name in ipairs(mason_lspconfig.get_installed_servers()) do
