@@ -9,6 +9,7 @@ ln -sf "$SCRIPT_PATH"/.zshrc ~/.zshrc
 ln -sf "$SCRIPT_PATH"/.config/nvim ~/.config
 ln -sf "$SCRIPT_PATH"/.config/kitty ~/.config
 ln -sf "$SCRIPT_PATH"/.config/urlscan ~/.config/
+ln -sf "$SCRIPT_PATH"/.config/pgcli/config ~/.config/pgcli
 ln -sf "$SCRIPT_PATH/Library/Application Support/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # tmux
