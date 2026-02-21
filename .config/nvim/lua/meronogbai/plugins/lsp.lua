@@ -22,9 +22,6 @@ return {
 			"L3MON4D3/LuaSnip",
 			"saadparwaiz1/cmp_luasnip",
 			"rafamadriz/friendly-snippets",
-
-			-- Better TypeScript
-			"pmizio/typescript-tools.nvim",
 		},
 		config = function()
 			local cmp = require("cmp")
@@ -119,6 +116,7 @@ return {
 					"stylua",
 					"tailwindcss-language-server",
 					"terraform-ls",
+					"tsgo",
 					"yaml-language-server",
 					"taplo",
 				},
@@ -198,16 +196,6 @@ return {
 				vim.lsp.config(server_name, server_config)
 				vim.lsp.enable(server_name)
 			end
-
-			require("typescript-tools").setup({
-				on_attach = on_attach,
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-				},
-			})
 
 			local luasnip = require("luasnip")
 			require("luasnip.loaders.from_vscode").lazy_load()
