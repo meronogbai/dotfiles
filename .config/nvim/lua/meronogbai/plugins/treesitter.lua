@@ -1,15 +1,28 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		lazy = false,
+		main = "nvim-treesitter",
 		build = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "rust", "tsx", "lua", "json", "css", "markdown", "markdown_inline" },
-				auto_install = true,
-				highlight = {
-					enable = true,
-					additional_vim_regex_highlighting = { "markdown" },
-				},
+		init = function()
+			local ensure_installed = { "rust", "tsx", "lua", "json", "css", "markdown", "markdown_inline" }
+			local already_installed = require("nvim-treesitter.config").get_installed()
+			local parsers_to_install = vim.iter(ensure_installed)
+				:filter(function(parser)
+					return not vim.tbl_contains(already_installed, parser)
+				end)
+				:totable()
+
+			require("nvim-treesitter").install(parsers_to_install)
+
+			vim.api.nvim_create_autocmd("FileType", {
+				callback = function(event)
+					-- Enable treesitter highlighting and disable regex syntax
+					pcall(vim.treesitter.start, event.buf)
+					-- Enable treesitter-based indentation
+					vim.bo[event.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+				end,
 			})
 		end,
 	},
