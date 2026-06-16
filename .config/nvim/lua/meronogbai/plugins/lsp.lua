@@ -57,7 +57,7 @@ return {
 			local on_attach = function(_client, bufnr)
 				local opts = { silent = true, buffer = bufnr, noremap = true }
 
-				vim.keymap.set("n", "gf", function()
+				vim.keymap.set("n", "<leader>cf", function()
 					conform.format({ async = false, lsp_fallback = true })
 				end, opts)
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
