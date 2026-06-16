@@ -33,64 +33,74 @@ end
 
 -- Opens the PR/commit that last updated the current line in github
 vim.keymap.set("n", "<leader>ghp", function()
-	local lineNum = vim.api.nvim__buf_stats(0).current_lnum
-	local fileName = vim.fn.expand("%")
-	local commitHashCommand = "git blame -L" .. lineNum .. "," .. lineNum .. " " .. fileName .. " | awk '{print $1}'"
+	local lineNum = vim.api.nvim_win_get_cursor(0)[1]
+	local fileName = vim.fn.expand("%:p")
 
 	with_spinner(function(done)
 		-- Get the commit hash asynchronously
-		vim.system({ "bash", "-c", commitHashCommand }, { text = true }, function(obj)
-			if obj.code ~= 0 or obj.stdout == "" or obj.stdout:match("^0+$") then
-				done()
-				print("❌ No valid commit found for this line!")
-				return
-			end
+		vim.system(
+			{ "git", "blame", "-L", tostring(lineNum) .. "," .. tostring(lineNum), "--", fileName },
+			{ text = true },
+			function(obj)
+				local blameOutput = obj.stdout or ""
+				local commitHash = blameOutput:match("^%S+")
 
-			local commitHash = obj.stdout:gsub("\n", "")
-
-			-- Check if the commit is part of a PR
-			local prCheckCommand = "gh pr list -s all --search "
-				.. commitHash
-				.. " --json number --jq 'map(.number) | @sh'"
-
-			vim.system({ "bash", "-c", prCheckCommand }, { text = true }, function(pr_obj)
-				local prNumbersStr = pr_obj.stdout:gsub("\n", "")
-
-				-- Extract PR numbers from shell-quoted output
-				local prNumbers = {}
-				for pr in prNumbersStr:gmatch("%d+") do
-					table.insert(prNumbers, pr)
+				if obj.code ~= 0 or not commitHash or commitHash:match("^0+$") then
+					done()
+					print("❌ No valid commit found for this line!")
+					return
 				end
 
-				if #prNumbers > 0 then
-					-- Open all found PRs
-					local opened = 0
-					local total = #prNumbers
+				-- Check if the commit is part of a PR
+				vim.system({
+					"gh",
+					"pr",
+					"list",
+					"-s",
+					"all",
+					"--search",
+					commitHash,
+					"--json",
+					"number",
+					"--jq",
+					".[].number",
+				}, { text = true }, function(pr_obj)
+					local prNumbersStr = (pr_obj.stdout or ""):gsub("\n", "")
 
-					for _, prNumber in ipairs(prNumbers) do
-						local prViewCommand = "gh pr view " .. prNumber .. " --web"
-						vim.system({ "bash", "-c", prViewCommand }, { text = true }, function(view_obj)
-							opened = opened + 1
-							if opened == total then
-								done()
-								print("✅ Successfully opened PR(s) in GitHub: " .. table.concat(prNumbers, ", "))
+					-- Extract PR numbers from the gh JSON query output
+					local prNumbers = {}
+					for pr in prNumbersStr:gmatch("%d+") do
+						table.insert(prNumbers, pr)
+					end
+
+					if #prNumbers > 0 then
+						-- Open all found PRs
+						local opened = 0
+						local total = #prNumbers
+
+						for _, prNumber in ipairs(prNumbers) do
+							vim.system({ "gh", "pr", "view", prNumber, "--web" }, { text = true }, function(view_obj)
+								opened = opened + 1
+								if opened == total then
+									done()
+									print("✅ Successfully opened PR(s) in GitHub: " .. table.concat(prNumbers, ", "))
+								end
+							end)
+						end
+					else
+						-- No PR found, open the commit instead
+						vim.system({ "gh", "browse", commitHash }, { text = true }, function(browse_obj)
+							done()
+							if browse_obj.code == 0 then
+								print("✅ Successfully opened commit in GitHub!")
+							else
+								print("❌ Failed to open commit: " .. (browse_obj.stderr or ""))
 							end
 						end)
 					end
-				else
-					-- No PR found, open the commit instead
-					local browseCommand = "gh browse " .. commitHash
-					vim.system({ "bash", "-c", browseCommand }, { text = true }, function(browse_obj)
-						done()
-						if browse_obj.code == 0 then
-							print("✅ Successfully opened commit in GitHub!")
-						else
-							print("❌ Failed to open commit: " .. (browse_obj.stderr or ""))
-						end
-					end)
-				end
-			end)
-		end)
+				end)
+			end
+		)
 	end, "Opening GitHub PR/commit")
 end, { desc = "Open PR(s) or commit in GitHub" })
 
