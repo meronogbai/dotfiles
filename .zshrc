@@ -81,9 +81,9 @@ zinit cdreplay -q
 # Custom Aliases
 alias ls='lsd'
 alias tree='lsd --tree'
-alias up='brew update && brew upgrade && brew cleanup -s'
+alias up='brew update && brew upgrade --yes'
+alias vi='nvim'
 alias vim='nvim'
-alias drs='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
 alias dco='docker compose'
 alias lg='lazygit'
 alias gt='git trim --no-confirm && git trim -d stray --no-confirm'
