@@ -2,6 +2,11 @@
 
 SCRIPT_PATH="$( cd -- "$(dirname "$0")" > /dev/null &&  pwd -P )" 2>&1
 
+mkdir -p ~/.config
+mkdir -p ~/.config/pgcli
+mkdir -p ~/Library/Application\ Support/lazygit
+mkdir -p ~/Library/Application\ Support/tlrc
+
 ln -sf "$SCRIPT_PATH"/.gitconfig ~/.gitconfig
 ln -sf "$SCRIPT_PATH"/.gitignore_global ~/.gitignore_global
 ln -sf "$SCRIPT_PATH"/.p10k.zsh ~/.p10k.zsh
@@ -10,6 +15,7 @@ ln -sf "$SCRIPT_PATH"/.config/nvim ~/.config
 ln -sf "$SCRIPT_PATH"/.config/kitty ~/.config
 ln -sf "$SCRIPT_PATH"/.config/urlscan ~/.config/
 ln -sf "$SCRIPT_PATH"/.config/pgcli/config ~/.config/pgcli
+ln -sf "$SCRIPT_PATH/Library/Application Support/tlrc/config.toml" ~/Library/Application\ Support/tlrc/config.toml
 ln -sf "$SCRIPT_PATH/Library/Application Support/lazygit/config.yml" ~/Library/Application\ Support/lazygit/config.yml
 
 # tmux
