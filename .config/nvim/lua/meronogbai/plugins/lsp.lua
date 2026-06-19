@@ -260,14 +260,6 @@ return {
 				},
 			})
 
-			-- Setup vim-dadbod
-			cmp.setup.filetype({ "sql", "mysql", "plsql" }, {
-				sources = {
-					{ name = "vim-dadbod-completion" },
-					{ name = "buffer" },
-				},
-			})
-
 			conform.setup({
 				formatters_by_ft = {
 					lua = { "stylua" },
